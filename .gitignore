@@ -28,7 +28,7 @@ yarn-error.log*
 dist/
 build/
 .next/
-out/
+# out/  # Commented out to allow tracking of the out directory
 .vercel
 .turbo
 
