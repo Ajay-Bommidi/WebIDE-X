@@ -17,7 +17,6 @@ interface EditorPaneProps {
   fontSize?: number
   tabSize?: number
   wordWrap?: "on" | "off"
-  editorKey: string
 }
 
 const languageMap = {
@@ -26,7 +25,7 @@ const languageMap = {
   js: "javascript",
 }
 
-export default function EditorPane({ language, value, onChange, theme, onCursorPositionChange, searchQuery, triggerFormat, onFormatDone, fontSize, tabSize, wordWrap, editorKey }: EditorPaneProps) {
+export default function EditorPane({ language, value, onChange, theme, onCursorPositionChange, searchQuery, triggerFormat, onFormatDone, fontSize, tabSize, wordWrap }: EditorPaneProps) {
   const editorRef = useRef<any>(null)
   const decorations = useRef<string[]>([])
 
@@ -101,7 +100,6 @@ export default function EditorPane({ language, value, onChange, theme, onCursorP
         }
       `}</style>
       <Editor
-        key={editorKey}
         height="100%"
         language={languageMap[language]}
         value={value}

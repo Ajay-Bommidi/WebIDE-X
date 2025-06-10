@@ -569,11 +569,25 @@ export const defaultCode = {
     });`,
   };
   
+  export interface FileTreeNode {
+    id: string;
+    name: string;
+    path: string;
+    type: "folder" | "html" | "css" | "js";
+    content?: string;
+    children?: FileTreeNode[];
+    icon?: string;
+    isDirty?: boolean;
+    isOpen?: boolean;
+  }
+  
   export type FileType = "html" | "css" | "js";
   
-  export interface FileItem {
-    name: string;
-    type: FileType;
-    content: string;
-    icon: string;
-  }
+  // Helper to get file content by type from defaultCode
+  export const getFileContent = (type: FileType): string => {
+    return defaultCode[type];
+  };
+  
+  export const initialFileStructure: FileTreeNode[] = [
+    // ... existing code ...
+  ];

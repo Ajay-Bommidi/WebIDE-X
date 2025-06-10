@@ -11,12 +11,15 @@ import {
   Code2,
   FolderTree,
   Terminal,
-  LayoutGrid
+  LayoutGrid,
+  X,
+  Keyboard
 } from "lucide-react"
 import FileExplorer from "./FileExplorer"
 import AIAssistant from "./AIAssistant"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
 
 interface SidebarProps {
   isVisible: boolean
@@ -35,9 +38,11 @@ interface SidebarProps {
   setEditorWordWrap: (wrap: "on" | "off") => void
   terminalFontFamily: string
   setTerminalFontFamily: (font: string) => void
+  isExplorerOpen: boolean
+  setIsExplorerOpen: (isOpen: boolean) => void
 }
 
-type SidebarPanel = "files" | "search" | "terminal" | "ai" | "git" | "extensions" | "settings"
+type SidebarPanel = "files" | "search" | "terminal" | "shortcuts" | "settings"
 
 interface SidebarItem {
   id: SidebarPanel
@@ -62,19 +67,17 @@ export default function Sidebar({
   setEditorWordWrap,
   terminalFontFamily,
   setTerminalFontFamily,
+  isExplorerOpen,
+  setIsExplorerOpen,
 }: SidebarProps) {
   const [activePanel, setActivePanel] = useState<SidebarPanel>("files")
   const [searchQuery, setSearchQuery] = useState("")
-
-  if (!isVisible) return null
 
   const sidebarItems: SidebarItem[] = [
     { id: "files", label: "Explorer", icon: FolderTree },
     { id: "search", label: "Search", icon: Search },
     { id: "terminal", label: "Terminal", icon: Terminal },
-    { id: "ai", label: "AI Assistant", icon: MessageSquare },
-    { id: "git", label: "Git", icon: GitBranch },
-    { id: "extensions", label: "Extensions", icon: Package },
+    { id: "shortcuts", label: "Shortcuts", icon: Keyboard },
     { id: "settings", label: "Settings", icon: Settings2 },
   ]
 
@@ -130,20 +133,36 @@ export default function Sidebar({
         )
       case "terminal":
         return <AIAssistant />
-      case "ai":
-        return <AIAssistant />
-      case "git":
+      case "shortcuts":
         return (
           <div className="p-4 text-gray-400 text-sm">
-            <p>{sidebarItems.find((item) => item.id === activePanel)?.label} panel</p>
-            <p className="mt-2">This feature is coming soon!</p>
-          </div>
-        )
-      case "extensions":
-        return (
-          <div className="p-4 text-gray-400 text-sm">
-            <p>{sidebarItems.find((item) => item.id === activePanel)?.label} panel</p>
-            <p className="mt-2">This feature is coming soon!</p>
+            <h3 className="text-white font-medium mb-4">Keyboard Shortcuts</h3>
+            <div className="space-y-3">
+              <div className="flex justify-between items-center">
+                <span>Save Project</span>
+                <kbd className="bg-gray-700 text-white px-2 py-1 rounded">Ctrl + S</kbd>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Toggle Sidebar</span>
+                <kbd className="bg-gray-700 text-white px-2 py-1 rounded">Ctrl + B</kbd>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Toggle Terminal</span>
+                <kbd className="bg-gray-700 text-white px-2 py-1 rounded">Ctrl + `</kbd>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Search in Editor</span>
+                <kbd className="bg-gray-700 text-white px-2 py-1 rounded">Ctrl + F</kbd>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Command Palette</span>
+                <kbd className="bg-gray-700 text-white px-2 py-1 rounded">Ctrl + P</kbd>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Format Code</span>
+                <kbd className="bg-gray-700 text-white px-2 py-1 rounded">Shift + Alt + F</kbd>
+              </div>
+            </div>
           </div>
         )
       case "settings":
@@ -225,12 +244,26 @@ export default function Sidebar({
   }
 
   return (
-    <div className={`h-full flex flex-col border-r border-border bg-sidebar-background text-sidebar-foreground ${isVisible ? "w-64" : "w-0"} transition-all duration-200`}>
+    <motion.div
+      initial={{ x: -200 }}
+      animate={{ x: isVisible ? 0 : -200 }}
+      exit={{ x: -200 }}
+      transition={{ duration: 0.2 }}
+      className="h-full flex flex-col border-r border-border bg-sidebar-background text-sidebar-foreground"
+    >
       <div className="flex items-center justify-between p-2 border-b border-border">
         <div className="flex items-center gap-2">
           <Code2 className="h-5 w-5 text-primary" />
           <span className="font-semibold">Explorer</span>
         </div>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setIsExplorerOpen(false)}
+          className="h-7 w-7 text-muted-foreground hover:text-foreground"
+        >
+          <X className="h-4 w-4" />
+        </Button>
       </div>
       <div className="flex-1 flex">
         <div className="w-12 border-r border-border flex flex-col items-center py-2 gap-1">
@@ -250,6 +283,6 @@ export default function Sidebar({
           {renderPanel()}
         </div>
       </div>
-    </div>
+    </motion.div>
   )
 }
