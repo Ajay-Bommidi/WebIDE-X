@@ -394,82 +394,82 @@ export default function FileExplorer({
       {/* New File Dialog */}
       <AnimatePresence>
         {showNewFileDialog && (
-          <Dialog open={showNewFileDialog} onOpenChange={setShowNewFileDialog}>
+      <Dialog open={showNewFileDialog} onOpenChange={setShowNewFileDialog}>
             <DialogContent className="sm:max-w-[425px] bg-gray-800 text-white border border-gray-700">
-              <DialogHeader>
+          <DialogHeader>
                 <DialogTitle className="text-white">Create New File</DialogTitle>
-              </DialogHeader>
+          </DialogHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="newFileName" className="text-right text-gray-400">
                     Name
-                  </Label>
-                  <Input
+            </Label>
+            <Input
                     id="newFileName"
-                    value={newItemName}
-                    onChange={(e) => setNewItemName(e.target.value)}
+              value={newItemName}
+              onChange={(e) => setNewItemName(e.target.value)}
                     className="col-span-3 bg-gray-700 border-gray-600 text-white"
                   />
                 </div>
-              </div>
-              <DialogFooter>
+          </div>
+          <DialogFooter>
                 <Button 
                   onClick={() => setShowNewFileDialog(false)}
                   variant="outline"
                   className="text-gray-300 border-gray-600 hover:bg-gray-700 hover:text-white"
                 >
-                  Cancel
-                </Button>
+              Cancel
+            </Button>
                 <Button 
                   onClick={handleCreateNewFile}
                   className="bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   Create
                 </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
         )}
       </AnimatePresence>
 
       {/* New Folder Dialog */}
       <AnimatePresence>
         {showNewFolderDialog && (
-          <Dialog open={showNewFolderDialog} onOpenChange={setShowNewFolderDialog}>
+      <Dialog open={showNewFolderDialog} onOpenChange={setShowNewFolderDialog}>
             <DialogContent className="sm:max-w-[425px] bg-gray-800 text-white border border-gray-700">
-              <DialogHeader>
+          <DialogHeader>
                 <DialogTitle className="text-white">Create New Folder</DialogTitle>
-              </DialogHeader>
+          </DialogHeader>
               <div className="grid gap-4 py-4">
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="newFolderName" className="text-right text-gray-400">
                     Name
-                  </Label>
-                  <Input
+            </Label>
+            <Input
                     id="newFolderName"
-                    value={newItemName}
-                    onChange={(e) => setNewItemName(e.target.value)}
+              value={newItemName}
+              onChange={(e) => setNewItemName(e.target.value)}
                     className="col-span-3 bg-gray-700 border-gray-600 text-white"
                   />
                 </div>
-              </div>
-              <DialogFooter>
+          </div>
+          <DialogFooter>
                 <Button 
                   onClick={() => setShowNewFolderDialog(false)}
                   variant="outline"
                   className="text-gray-300 border-gray-600 hover:bg-gray-700 hover:text-white"
                 >
-                  Cancel
-                </Button>
+              Cancel
+            </Button>
                 <Button 
                   onClick={handleCreateNewFolder}
                   className="bg-blue-600 hover:bg-blue-700 text-white"
                 >
                   Create
                 </Button>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
         )}
       </AnimatePresence>
     </div>

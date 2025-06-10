@@ -17,9 +17,10 @@ import { motion } from "framer-motion"
 interface TopBarProps {
   onMenuAction: (action: string) => void
   onSearch: (query: string) => void
+  onExport: () => void
 }
 
-export default function TopBar({ onMenuAction, onSearch }: TopBarProps) {
+export default function TopBar({ onMenuAction, onSearch, onExport }: TopBarProps) {
   const [searchQuery, setSearchQuery] = useState("")
 
   const handleSearch = (e: React.FormEvent) => {
@@ -50,6 +51,15 @@ export default function TopBar({ onMenuAction, onSearch }: TopBarProps) {
         >
           <Search className="h-4 w-4" />
         </Button>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onExport}
+          className="h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700"
+          title="Download Project (Zip)"
+        >
+          <Download className="h-4 w-4" />
+        </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button 
@@ -75,13 +85,6 @@ export default function TopBar({ onMenuAction, onSearch }: TopBarProps) {
             >
               <Save className="h-4 w-4 mr-2 text-gray-400" />
               Save
-            </DropdownMenuItem>
-            <DropdownMenuItem 
-              onClick={() => onMenuAction("export")}
-              className="hover:bg-gray-600 focus:bg-gray-600"
-            >
-              <Download className="h-4 w-4 mr-2 text-gray-400" />
-              Export
             </DropdownMenuItem>
             <DropdownMenuSeparator className="bg-gray-600" />
             <DropdownMenuItem 

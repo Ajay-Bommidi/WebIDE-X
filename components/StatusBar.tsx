@@ -36,9 +36,9 @@ export default function StatusBar({
           <Tooltip>
             <TooltipTrigger asChild>
               <div className="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors">
-                <GitBranch className="w-3 h-3" />
-                <span>main</span>
-              </div>
+          <GitBranch className="w-3 h-3" />
+          <span>main</span>
+        </div>
             </TooltipTrigger>
             <TooltipContent className="bg-gray-800 text-white border-gray-600">
               <p>Current Git Branch</p>
@@ -54,12 +54,12 @@ export default function StatusBar({
                 initial={false}
                 animate={{ color: hasErrors ? "#ef4444" : "#22c55e" }}
               >
-                {hasErrors ? (
+          {hasErrors ? (
                   <AlertCircle className="w-3 h-3" />
-                ) : (
+          ) : (
                   <CheckCircle className="w-3 h-3" />
-                )}
-                <span>{hasErrors ? "Errors" : "No Issues"}</span>
+          )}
+          <span>{hasErrors ? "Errors" : "No Issues"}</span>
               </motion.div>
             </TooltipTrigger>
             <TooltipContent className="bg-gray-800 text-white border-gray-600">
@@ -83,7 +83,7 @@ export default function StatusBar({
             </Tooltip>
           </TooltipProvider>
         )}
-      </div>
+        </div>
 
       {/* Center Section - Designed by Credit */}
       <div className="text-center flex-1 hidden sm:block">
@@ -98,9 +98,9 @@ export default function StatusBar({
             <TooltipTrigger asChild>
               <div className="flex items-center space-x-1">
                 <TextSelect className="w-3 h-3" />
-                <span>
-                  Ln {lineNumber}, Col {columnNumber}
-                </span>
+        <span>
+          Ln {lineNumber}, Col {columnNumber}
+        </span>
               </div>
             </TooltipTrigger>
             <TooltipContent className="bg-gray-800 text-white border-gray-600">
@@ -114,7 +114,7 @@ export default function StatusBar({
             <TooltipTrigger asChild>
               <div className="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors">
                 <Code className="w-3 h-3" />
-                <span>{language.toUpperCase()}</span>
+        <span>{language.toUpperCase()}</span>
               </div>
             </TooltipTrigger>
             <TooltipContent className="bg-gray-800 text-white border-gray-600">
@@ -132,7 +132,7 @@ export default function StatusBar({
               >
                 <Lightbulb className={`w-3 h-3 ${theme === 'vs-dark' ? 'text-yellow-400' : 'text-gray-400'}`} />
                 <span>{theme === "vs-dark" ? "Dark" : "Light"}</span>
-              </button>
+        </button>
             </TooltipTrigger>
             <TooltipContent className="bg-gray-800 text-white border-gray-600">
               <p>Toggle Theme</p>
@@ -145,8 +145,8 @@ export default function StatusBar({
             <TooltipTrigger asChild>
               <div className="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors">
                 <Zap className="w-3 h-3 text-green-400" />
-                <span>Live</span>
-              </div>
+          <span>Live</span>
+        </div>
             </TooltipTrigger>
             <TooltipContent className="bg-gray-800 text-white border-gray-600">
               <p>Live Preview Status</p>

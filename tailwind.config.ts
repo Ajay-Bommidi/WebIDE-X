@@ -91,6 +91,9 @@ const config: Config = {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+  ],
+  // This is a comment to force Next.js to re-evaluate CSS during build
 };
 export default config;

@@ -19,12 +19,12 @@ import FileExplorer from "./FileExplorer"
 import AIAssistant from "./AIAssistant"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { motion } from "framer-motion"
+import { FileTreeNode } from "../utils/defaultCode"
 
 interface SidebarProps {
   isVisible: boolean
   files: any[]
-  activeFile: string
+  activeFile: FileTreeNode | null
   onFileSelect: (file: string) => void
   onFileCreate: (parentPath: string, name: string, type: "file" | "folder") => void
   onFileDelete: (path: string) => void
@@ -89,6 +89,8 @@ export default function Sidebar({
             <div className="p-2 border-b border-border">
               <Input
                 type="text"
+                id="fileSearchInput"
+                name="fileSearchInput"
                 value={searchQuery}
                 placeholder="Search files..."
                 className="h-8"
@@ -115,6 +117,8 @@ export default function Sidebar({
           <div className="flex flex-col h-full">
             <div className="p-2 border-b border-border">
                 <Input
+                  id="panelSearchInput"
+                  name="panelSearchInput"
                   value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value)
@@ -244,45 +248,45 @@ export default function Sidebar({
   }
 
   return (
-    <motion.div
-      initial={{ x: -200 }}
-      animate={{ x: isVisible ? 0 : -200 }}
-      exit={{ x: -200 }}
-      transition={{ duration: 0.2 }}
-      className="h-full flex flex-col border-r border-border bg-sidebar-background text-sidebar-foreground"
+    <div
+      className="h-full flex flex-col bg-sidebar-background text-sidebar-foreground"
     >
-      <div className="flex items-center justify-between p-2 border-b border-border">
-        <div className="flex items-center gap-2">
-          <Code2 className="h-5 w-5 text-primary" />
-          <span className="font-semibold">Explorer</span>
-        </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsExplorerOpen(false)}
-          className="h-7 w-7 text-muted-foreground hover:text-foreground"
-        >
-          <X className="h-4 w-4" />
-        </Button>
-      </div>
-      <div className="flex-1 flex">
-        <div className="w-12 border-r border-border flex flex-col items-center py-2 gap-1">
-          {sidebarItems.map((item) => (
+      {isVisible && (
+        <>
+          <div className="flex items-center justify-between p-2 border-b border-border">
+            <div className="flex items-center gap-2">
+              <Code2 className="h-5 w-5 text-primary" />
+              <span className="font-semibold">Explorer</span>
+            </div>
             <Button
-              key={item.id}
               variant="ghost"
               size="icon"
-              className={`h-9 w-9 ${activePanel === item.id ? "bg-accent text-accent-foreground" : "hover:bg-accent/50"}`}
-              onClick={() => setActivePanel(item.id)}
+              onClick={() => setIsExplorerOpen(false)}
+              className="h-7 w-7 text-muted-foreground hover:text-foreground"
             >
-              <item.icon className="h-4 w-4" />
+              <X className="h-4 w-4" />
             </Button>
-          ))}
-        </div>
-        <div className="flex-1">
-          {renderPanel()}
-        </div>
-      </div>
-    </motion.div>
+          </div>
+          <div className="flex-1 flex">
+            <div className="shrink-0 border-r border-border flex flex-col items-center py-2 gap-1 w-12">
+              {sidebarItems.map((item) => (
+                <Button
+                  key={item.id}
+                  variant="ghost"
+                  size="icon"
+                  className={`h-9 w-9 ${activePanel === item.id ? "bg-accent text-accent-foreground" : "hover:bg-accent/50"}`}
+                  onClick={() => setActivePanel(item.id)}
+                >
+                  <item.icon className="h-4 w-4" />
+                </Button>
+              ))}
+            </div>
+            <div className="flex-1">
+              {renderPanel()}
+            </div>
+          </div>
+        </>
+      )}
+    </div>
   )
 }

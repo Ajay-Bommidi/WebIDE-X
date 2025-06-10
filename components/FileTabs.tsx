@@ -26,7 +26,7 @@ export default function FileTabs({ activeFile, onFileSelect, openFiles, onCloseF
           const Icon = config?.icon || FileText
           const isActive = activeFile?.path === file.path
 
-          return (
+        return (
             <motion.div
               key={file.path}
               initial={{ opacity: 0, x: -20 }}
@@ -39,31 +39,31 @@ export default function FileTabs({ activeFile, onFileSelect, openFiles, onCloseF
               }}
               layout
               className={`flex items-center gap-2 px-4 py-2 text-sm border-r border-gray-700 transition-colors duration-150 ease-in-out cursor-pointer ${
-                isActive
-                  ? "bg-gray-900 text-white border-b-2 border-blue-500"
-                  : "text-gray-400 hover:text-white hover:bg-gray-700"
-              }`}
-            >
+              isActive
+                ? "bg-gray-900 text-white border-b-2 border-blue-500"
+                : "text-gray-400 hover:text-white hover:bg-gray-700"
+            }`}
+          >
               <button 
                 onClick={() => onFileSelect(file)} 
                 className="flex items-center gap-2 min-w-0"
               >
                 <Icon className={`w-4 h-4 flex-shrink-0 ${config?.color || "text-gray-400"}`} />
                 <span className="truncate">{file.name}</span>
-              </button>
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
+            </button>
+            <button
+              onClick={(e) => {
+                e.stopPropagation()
                   onCloseFile(file)
-                }}
+              }}
                 className="ml-2 p-1 hover:bg-gray-700 rounded opacity-50 hover:opacity-100 flex-shrink-0"
                 aria-label={`Close ${file.name}`}
-              >
-                <X className="w-3 h-3" />
-              </button>
+            >
+              <X className="w-3 h-3" />
+            </button>
             </motion.div>
-          )
-        })}
+        )
+      })}
       </AnimatePresence>
     </div>
   )

@@ -1,3 +1,5 @@
+import JSZip from "jszip"
+
 const STORAGE_KEY = "code-editor-project"
 
 export interface ProjectData {
@@ -31,26 +33,24 @@ export const loadProject = (): ProjectData | null => {
   }
 }
 
-export const exportProject = (data: ProjectData): void => {
-  const projectData = {
-    files: {
-      "index.html": data.html,
-      "style.css": data.css,
-      "script.js": data.js,
-    },
-    exportedAt: new Date().toISOString(),
+export const exportProject = async (data: ProjectData): Promise<void> => {
+  const zip = new JSZip()
+
+  zip.file("index.html", data.html)
+  zip.file("style.css", data.css)
+  zip.file("script.js", data.js)
+
+  try {
+    const content = await zip.generateAsync({ type: "blob" })
+    const url = URL.createObjectURL(content)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = "code-editor-project.zip"
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  } catch (error) {
+    console.error("Failed to generate or download zip:", error)
   }
-
-  const blob = new Blob([JSON.stringify(projectData, null, 2)], {
-    type: "application/json",
-  })
-
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement("a")
-  a.href = url
-  a.download = "code-editor-project.json"
-  document.body.appendChild(a)
-  a.click()
-  document.body.removeChild(a)
-  URL.revokeObjectURL(url)
 }

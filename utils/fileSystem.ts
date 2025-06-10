@@ -227,7 +227,7 @@ export const toggleFolder = (files: FileTreeNode[], path: string): FileTreeNode[
       }
       return item
     })
-  }
+    }
   return toggle(files)
 }
 
@@ -260,6 +260,6 @@ export const getDefaultContent = (fileType: FileType | "folder"): string => {
     case "js":
       return "// New JavaScript File\nconsole.log(\"Hello, JavaScript!\");\n"
     default:
-      return ""
-  }
+  return ""
+}
 };

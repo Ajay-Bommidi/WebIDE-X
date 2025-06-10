@@ -1,41 +1,22 @@
 "use client"
 
-import { FileType, FileTreeNode } from "../utils/defaultCode"
-import { Save, PanelLeft, Share2, Play, Settings2, Terminal, Fullscreen, FullscreenExit } from "lucide-react"
+import { Save, PanelLeft, Code2, Sun, Moon } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 
 interface ToolbarProps {
-  activeFile: FileTreeNode | null
   onSave: () => void
-  onExport: () => void
+  onTogglePanel: () => void
+  onFormat: () => void
+  onThemeToggle: () => void
+  theme: "vs-dark" | "light"
   onRun: () => void
-  onShare: () => void
-  onToggleTerminal: () => void
-  onToggleSidebar: () => void
-  onTogglePreviewFullScreen: () => void
-  triggerEditorFormat: boolean
-  onEditorFormatDone: () => void
-  isSidebarVisible: boolean
-  isPreviewFullScreen: boolean
+  // This comment is added to trigger a linter re-evaluation
 }
 
-export default function Toolbar({
-  activeFile,
-  onSave,
-  onExport,
-  onRun,
-  onShare,
-  onToggleTerminal,
-  onToggleSidebar,
-  onTogglePreviewFullScreen,
-  triggerEditorFormat,
-  onEditorFormatDone,
-  isSidebarVisible,
-  isPreviewFullScreen,
-}: ToolbarProps) {
+export default function Toolbar({ onSave, onTogglePanel, onFormat, onThemeToggle, theme, onRun }: ToolbarProps) {
   return (
-    <motion.div
+    <motion.div 
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       className="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700"
@@ -44,7 +25,7 @@ export default function Toolbar({
         <Button
           variant="ghost"
           size="icon"
-          onClick={onToggleSidebar}
+          onClick={onTogglePanel}
           className="h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700"
           title="Toggle Sidebar"
         >
@@ -53,42 +34,27 @@ export default function Toolbar({
         <Button
           variant="ghost"
           size="icon"
-          onClick={onRun}
+          onClick={onFormat}
           className="h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700"
-          title="Run Code"
+          title="Format Code"
         >
-          <Play className="h-4 w-4" />
+          <Code2 className="h-4 w-4" />
         </Button>
+      </div>
+
+      <div className="flex items-center space-x-2">
         <Button
           variant="ghost"
           size="icon"
-          onClick={onTogglePreviewFullScreen}
+          onClick={onThemeToggle}
           className="h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700"
-          title="Toggle Full Screen Preview"
+          title={`Switch to ${theme === 'vs-dark' ? 'Light' : 'Dark'} Theme`}
         >
-          {isPreviewFullScreen ? (
-            <FullscreenExit className="h-4 w-4" />
+          {theme === 'vs-dark' ? (
+            <Sun className="h-4 w-4" />
           ) : (
-            <Fullscreen className="h-4 w-4" />
+            <Moon className="h-4 w-4" />
           )}
-        </Button>
-      </div>
-
-      <div className="flex items-center space-x-2">
-        <span className="text-sm text-gray-400">
-          {activeFile ? activeFile.name : "No file open"}
-        </span>
-      </div>
-
-      <div className="flex items-center space-x-2">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onShare}
-          className="h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700"
-          title="Share"
-        >
-          <Share2 className="h-4 w-4" />
         </Button>
         <Button
           variant="ghost"
@@ -102,20 +68,11 @@ export default function Toolbar({
         <Button
           variant="ghost"
           size="icon"
-          onClick={onToggleTerminal}
+          onClick={onRun}
           className="h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700"
-          title="Toggle Terminal"
+          title="Run Code"
         >
-          <Terminal className="h-4 w-4" />
-        </Button>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => {}}
-          className="h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700"
-          title="Settings"
-        >
-          <Settings2 className="h-4 w-4" />
+          <Code2 className="h-4 w-4" />
         </Button>
       </div>
     </motion.div>

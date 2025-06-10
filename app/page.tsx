@@ -43,7 +43,6 @@ export default function WebIDEX() {
   const [currentSearchQuery, setCurrentSearchQuery] = useState<string>("")
   const [triggerEditorFormat, setTriggerEditorFormat] = useState(false)
   const [panelSizes, setPanelSizes] = useState<number[]>([60, 40])
-  const [isPreviewFullScreen, setIsPreviewFullScreen] = useState(false)
 
   // Ref for PreviewPane to trigger refresh
   const previewPaneRef = useRef<PreviewPaneRef>(null)
@@ -484,26 +483,22 @@ export default function WebIDEX() {
     toast.info("Preview Refreshed!");
   }, []);
 
-  const togglePreviewFullScreen = () => {
-    setIsPreviewFullScreen((prev) => !prev)
-  }
-
   return (
     <div className="h-screen flex flex-col bg-gray-900 text-white">
-      <TopBar onMenuAction={handleMenuAction} onSearch={handleSearch} />
+      <TopBar onMenuAction={handleMenuAction} onSearch={handleSearch} onExport={handleExport} />
 
       <div className="flex-1 flex overflow-hidden">
         <ResizablePanelGroup
           direction="horizontal"
-          className="h-full w-full min-h-[inherit]"
+          className="h-full w-full min-h-[inherit] min-w-0"
         >
           {/* Sidebar Panel */}
           <ResizablePanel
-            defaultSize={panelSizes[0]}
-            collapsedSize={0}
-            collapsible={true}
-            minSize={sidebarVisible ? 20 : 0}
+            defaultSize={20}
+            minSize={0}
             maxSize={30}
+            collapsible={true}
+            collapsedSize={0}
             onCollapse={() => setSidebarVisible(false)}
             onExpand={() => setSidebarVisible(true)}
             className="border-r border-gray-700"
@@ -525,28 +520,21 @@ export default function WebIDEX() {
               setEditorWordWrap={setEditorWordWrap}
               terminalFontFamily={terminalFontFamily}
               setTerminalFontFamily={setTerminalFontFamily}
-              isExplorerOpen={true}
-              setIsExplorerOpen={() => {}}
-              currentPanel={sidebarVisible ? "files" : undefined}
+              isExplorerOpen={sidebarVisible}
+              setIsExplorerOpen={setSidebarVisible}
             />
           </ResizablePanel>
 
           {/* Main Content Area */}
-          <ResizablePanel defaultSize={80}>
+          <ResizablePanel defaultSize={80} minSize={0} className="min-w-0">
             <div className="flex flex-col h-full">
               <Toolbar
-                activeFile={activeFile?.path || ""}
                 onSave={handleSave}
-                onExport={handleExport}
+                onTogglePanel={() => setSidebarVisible(!sidebarVisible)}
+                onFormat={() => setTriggerEditorFormat(true)}
+                onThemeToggle={handleThemeToggle}
+                theme={theme}
                 onRun={refreshPreview}
-                onShare={() => {}}
-                onToggleTerminal={() => setTerminalVisible(!terminalVisible)}
-                onToggleSidebar={() => setSidebarVisible(!sidebarVisible)}
-                onTogglePreviewFullScreen={togglePreviewFullScreen}
-                triggerEditorFormat={triggerEditorFormat}
-                onEditorFormatDone={handleEditorFormatDone}
-                isSidebarVisible={sidebarVisible}
-                isPreviewFullScreen={isPreviewFullScreen}
               />
               
               <FileTabs
@@ -566,16 +554,16 @@ export default function WebIDEX() {
               />
 
               {/* Code and Preview Split */}
-              <ResizablePanelGroup direction="horizontal" className="flex-1">
+              <ResizablePanelGroup direction="horizontal" className="flex-1 min-w-0">
                 <ResizablePanel 
-                  defaultSize={60} 
+                  defaultSize={60}
                   minSize={0}
-                  className="relative"
+                  className="relative flex-1"
                 >
-                  {activeFile ? (
+                  {activeFile && activeFileType ? (
                     <EditorPane
                       key="monaco-editor-instance"
-                      language={activeFileType as FileType}
+                      language={activeFileType}
                       value={activeFile?.content || ""}
                       onChange={handleCodeChange}
                       theme={theme}
@@ -589,7 +577,9 @@ export default function WebIDEX() {
                     />
                   ) : (
                     <div className="flex items-center justify-center h-full text-gray-400 text-lg">
-                      Select a file to start coding
+                      {activeFile && activeFile.type === "folder"
+                        ? "Select a file within this folder to start coding"
+                        : "Select a file to start coding"}
                     </div>
                   )}
                 </ResizablePanel>
@@ -606,7 +596,7 @@ export default function WebIDEX() {
                 <ResizablePanel 
                   defaultSize={40}
                   minSize={0}
-                  className="relative bg-white"
+                  className="relative bg-white flex-1"
                 >
                   <PreviewPane
                     ref={previewPaneRef}
@@ -636,7 +626,7 @@ export default function WebIDEX() {
         activeFile={activeFile}
         lineNumber={cursorPosition.line}
         columnNumber={cursorPosition.column}
-        language={activeFileType || 'plaintext'}
+        language={(activeFileType || 'plaintext') as string}
         hasErrors={hasErrors}
         theme={theme}
         onThemeChange={handleThemeToggle}

@@ -25,41 +25,41 @@ const PreviewPane = forwardRef<PreviewPaneRef, PreviewPaneProps>(({ html, css, j
 
   const createPreviewContent = () => {
     return `
-      <!DOCTYPE html>
+<!DOCTYPE html>
       <html>
-        <head>
-          <meta charset="UTF-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
           <style>
             ${css}
             /* Add some basic reset styles */
             body { margin: 0; padding: 0; }
             * { box-sizing: border-box; }
           </style>
-        </head>
-        <body>
-          ${html}
-          <script>
-            // Error handling
+</head>
+<body>
+    ${html}
+    <script>
+        // Error handling
             window.onerror = function(message, source, lineno, colno, error) {
-              window.parent.postMessage({
+            window.parent.postMessage({
                 type: 'error',
                 error: message
-              }, '*');
+            }, '*');
               return true;
             };
-
-            // Execute user JavaScript
-            try {
-              ${js}
-            } catch (error) {
-              window.parent.postMessage({
+        
+        // Execute user JavaScript
+        try {
+            ${js}
+        } catch (error) {
+            window.parent.postMessage({
                 type: 'error',
                 error: error.message
-              }, '*');
-            }
-          </script>
-        </body>
+            }, '*');
+        }
+    </script>
+</body>
       </html>
     `
   }
@@ -168,17 +168,17 @@ const PreviewPane = forwardRef<PreviewPaneRef, PreviewPaneProps>(({ html, css, j
                 <div className="flex-1 break-words">{errorMessage}</div>
               </div>
             </motion.div>
-          )}
+      )}
         </AnimatePresence>
 
-        <iframe
-          ref={iframeRef}
+      <iframe
+        ref={iframeRef}
           className="w-full h-full border-0"
           sandbox="allow-scripts"
           title="Preview"
           srcDoc={createPreviewContent()}
-        />
-      </div>
+      />
+    </div>
     </motion.div>
   )
 })
