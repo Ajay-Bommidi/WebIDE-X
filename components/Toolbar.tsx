@@ -33,17 +33,17 @@ export default function Toolbar({
       </Button>
       <Button variant="ghost" size="icon" onClick={onShare} className="hover:bg-accent">
         <Share2 className="h-4 w-4" />
-      </Button>
+        </Button>
       <div className="flex-1" />
       <Button variant="ghost" size="icon" className="hover:bg-accent">
         <Code2 className="h-4 w-4" />
-      </Button>
+        </Button>
       <Button variant="ghost" size="icon" className="hover:bg-accent">
         <Play className="h-4 w-4" />
-      </Button>
+        </Button>
       <Button variant="ghost" size="icon" className="hover:bg-accent">
         <Settings2 className="h-4 w-4" />
-      </Button>
+        </Button>
       {lastSaved && (
         <span className="text-xs text-muted-foreground ml-2">
           Last saved: {new Date(lastSaved).toLocaleTimeString()}

@@ -40,7 +40,7 @@ export default function TopBar({ onMenuAction, onSearch }: TopBarProps) {
           className="hover:bg-accent"
         >
           <Search className="h-4 w-4" />
-        </Button>
+            </Button>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="hover:bg-accent">

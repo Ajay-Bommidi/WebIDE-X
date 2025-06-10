@@ -96,14 +96,14 @@ export default function Sidebar({
               />
             </div>
             <div className="flex-1 overflow-y-auto">
-              <FileExplorer
-                files={files}
-                activeFile={activeFile}
-                onFileSelect={onFileSelect}
-                onFileCreate={onFileCreate}
-                onFileDelete={onFileDelete}
-                onFileRename={onFileRename}
-              />
+          <FileExplorer
+            files={files}
+            activeFile={activeFile}
+            onFileSelect={onFileSelect}
+            onFileCreate={onFileCreate}
+            onFileDelete={onFileDelete}
+            onFileRename={onFileRename}
+          />
             </div>
           </div>
         )
@@ -111,8 +111,8 @@ export default function Sidebar({
         return (
           <div className="flex flex-col h-full">
             <div className="p-2 border-b border-border">
-              <Input
-                value={searchQuery}
+                <Input
+                  value={searchQuery}
                 onChange={(e) => {
                   setSearchQuery(e.target.value)
                   onSearch(e.target.value)
