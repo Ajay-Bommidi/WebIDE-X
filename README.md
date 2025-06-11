@@ -17,7 +17,7 @@ A modern, feature-rich online code editor built with HTML, CSS, and JavaScript. 
 
 ## Live Demo
 
-[View Live Demo](https://your-github-username.github.io/online-code-editor)
+[View Live Demo](https://onlinecodeeditors.netlify.app/)
 
 ## Getting Started
 
@@ -30,12 +30,12 @@ A modern, feature-rich online code editor built with HTML, CSS, and JavaScript. 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/online-code-editor.git
+git clone https://github.com/Ajay-Bommidi/WebIDE-X.git
 ```
 
 2. Navigate to the project directory:
 ```bash
-cd online-code-editor
+cd WebIDE-X
 ```
 
 3. Open `index.html` in your web browser or use a local server:
@@ -95,6 +95,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_twitter)
+Your Name - [@Linkedin](https://www.linkedin.com/in/ajay-bommidi-88b74b279)
 
-Project Link: [https://github.com/your-username/online-code-editor](https://github.com/your-username/online-code-editor) 
+Project Link: [github](https://github.com/Ajay-Bommidi/WebIDE-X.git) 
