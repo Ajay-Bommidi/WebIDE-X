@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import { ChevronRight, ChevronDown, FileText, Folder, FolderOpen, Plus, Edit2, Trash2, FileJson, MoreVertical, FileCode } from "lucide-react"
 import {
   ContextMenu,
@@ -8,6 +8,7 @@ import {
   ContextMenuItem,
   ContextMenuSeparator,
   ContextMenuTrigger,
+  ContextMenuPortal,
 } from "@/components/ui/context-menu"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
@@ -64,247 +65,158 @@ const FileItem = ({
   onCreate,
   activeFile,
 }: FileItemProps) => {
-  const [isEditing, setIsEditing] = useState(false)
-  const [newName, setNewName] = useState(file.name)
+  const { id, name, type, path, children, isOpen } = file
+  const isSelected = activeFile?.path === path
+  const [isRenaming, setIsRenaming] = useState(false)
+  const [newName, setNewName] = useState(name)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleRename = () => {
-    if (newName && newName !== file.name) {
-      onRename(file.path, newName)
-    }
-    setIsEditing(false)
-  }
+  const handleRenameClick = useCallback(() => {
+    setIsRenaming(true)
+    setTimeout(() => {
+      inputRef.current?.focus()
+    }, 0)
+  }, [])
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleRename()
-    } else if (e.key === "Escape") {
-      setIsEditing(false)
-      setNewName(file.name)
+  const handleRenameSubmit = useCallback(() => {
+    if (newName.trim() !== "" && newName !== name) {
+      onRename(path, newName)
     }
-  }
+    setIsRenaming(false)
+  }, [newName, name, path, onRename])
 
-  useEffect(() => {
-    if (isEditing && inputRef.current) {
-      inputRef.current.focus()
-      inputRef.current.select()
-    }
-  }, [isEditing])
+  const handleDeleteClick = useCallback(() => {
+    onDelete(path)
+  }, [path, onDelete])
 
-  const isActive = activeFile?.path === file.path
+  const handleNewFileClick = useCallback(() => {
+    onCreate(path, `new-file.${type === "folder" ? "txt" : type}`, "file")
+  }, [path, type, onCreate])
+
+  const handleNewFolderClick = useCallback(() => {
+    onCreate(path, "New Folder", "folder")
+  }, [path, onCreate])
+
+  const indentation = level * 16 // 16px per level
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: -10 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -10 }}
-      transition={{ duration: 0.15 }}
-      layout
-    >
+    <div className="w-full">
       <ContextMenu>
-        <ContextMenuTrigger asChild>
+        <ContextMenuTrigger className="w-full">
           <div
-            className={`group flex items-center px-2 py-1 cursor-pointer transition-colors duration-150 ease-in-out ${
-              isActive ? "bg-blue-600 text-white" : "hover:bg-gray-700 text-gray-300 hover:text-white"
-            }`}
-            style={{ paddingLeft: `${level * 12 + 8}px` }}
-            onClick={() => {
-              if (file.type !== "folder") {
-                onSelect(file.path)
-              } else {
-                // Toggle folder open/closed
-                onSelect(file.path)
-              }
-            }}
+            className={`flex items-center py-1 pr-2 rounded-md cursor-pointer hover:bg-gray-700/50 transition-colors ${isSelected ? "bg-blue-600/30 hover:bg-blue-600/40" : ""}`}
+            style={{ paddingLeft: `${indentation + 8}px` }}
+            onClick={() => type === "folder" ? onSelect(path) : onSelect(path)}
           >
-            {file.type === "folder" && (
-              <button
-                onClick={(e) => {
-                  e.stopPropagation()
-                  onSelect(file.path)
-                }}
-                className="p-1 -ml-1 mr-1 rounded-sm hover:bg-gray-600 transition-colors"
-              >
-                {file.isOpen ? (
-                  <ChevronDown className="h-4 w-4 text-gray-400" />
-                ) : (
-                  <ChevronRight className="h-4 w-4 text-gray-400" />
-                )}
-              </button>
-            )}
-            <div className="flex items-center flex-1 min-w-0">
-              <FileIcon file={file} className="h-4 w-4 mr-2 flex-shrink-0" />
-              {isEditing ? (
-                <Input
-                  ref={inputRef}
-                  type="text"
-                  value={newName}
-                  onChange={(e) => setNewName(e.target.value)}
-                  onBlur={handleRename}
-                  onKeyDown={handleKeyDown}
-                  className="flex-1 bg-gray-900 border border-gray-600 rounded px-1 py-0.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 text-white"
-                />
+            {type === "folder" ? (
+              isOpen ? (
+                <ChevronDown size={16} className="flex-shrink-0 text-gray-400 mr-1" />
               ) : (
-                <span className="truncate text-sm font-medium">{file.name}</span>
-              )}
-            </div>
-            <div className="opacity-0 group-hover:opacity-100 flex items-center space-x-1 ml-auto">
-              {file.type === "folder" && (
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-6 w-6 text-gray-400 hover:text-white hover:bg-gray-600"
-                  onClick={(e) => {
-                    e.stopPropagation()
-                    onCreate(file.path, "", "file")
-                  }}
-                  title="New File"
-                >
-                  <Plus className="h-3 w-3" />
-                </Button>
-              )}
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                  <Button 
-                    variant="ghost" 
-                    size="icon" 
-                    className="h-6 w-6 text-gray-400 hover:text-white hover:bg-gray-600"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <MoreVertical className="h-3 w-3" />
-                  </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-48 bg-gray-800 border border-gray-700 text-white">
-                  <ContextMenuItem 
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      setIsEditing(true)
-                    }}
-                    className="hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
-                  >
-                    <Edit2 className="h-4 w-4 mr-2" />
-                    Rename
-                  </ContextMenuItem>
-                  {file.type === "folder" && (
-                    <ContextMenuItem
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        onCreate(file.path, "", "folder")
-                      }}
-                      className="hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
-                    >
-                      <FolderOpen className="h-4 w-4 mr-2" />
-                      New Folder
-                    </ContextMenuItem>
-                  )}
-                  <ContextMenuItem 
-                    className="text-red-400 focus:text-red-400 hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      onDelete(file.path)
-                    }}
-                  >
-                    <Trash2 className="h-4 w-4 mr-2" />
-                    Delete
-                  </ContextMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
+                <ChevronRight size={16} className="flex-shrink-0 text-gray-400 mr-1" />
+              )
+            ) : (
+              <span style={{ marginLeft: "17px" }} /> // Spacer for file icon
+            )}
+            {type === "folder" ? (
+              <Folder size={16} className="flex-shrink-0 text-blue-400 mr-1" />
+            ) : (
+              <FileText size={16} className="flex-shrink-0 text-gray-400 mr-1" />
+            )}
+            {isRenaming ? (
+              <Input
+                ref={inputRef}
+                value={newName}
+                onChange={(e) => setNewName(e.target.value)}
+                onBlur={handleRenameSubmit}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleRenameSubmit()
+                  } else if (e.key === "Escape") {
+                    setNewName(name) // Revert on escape
+                    setIsRenaming(false)
+                  }
+                }}
+                className="flex-1 bg-gray-800 text-white h-6 px-1 py-0 text-sm focus:ring-1 focus:ring-blue-500"
+              />
+            ) : (
+              <span className="flex-1 text-sm text-gray-300 truncate">{name}</span>
+            )}
           </div>
         </ContextMenuTrigger>
-        <ContextMenuContent className="w-48 bg-gray-800 border border-gray-700 text-white">
-          <ContextMenuItem 
-            onClick={(e) => {
-              e.stopPropagation()
-              if (file.type !== "folder") {
-                onSelect(file.path)
-              } else {
-                onSelect(file.path) // Toggle folder on right click as well
-              }
-            }}
-            className="hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
-          >
-            {file.type !== "folder" ? (
-              <FileText className="h-4 w-4 mr-2" />
-            ) : file.isOpen ? (
-              <FolderOpen className="h-4 w-4 mr-2" />
-            ) : (
-              <Folder className="h-4 w-4 mr-2" />
+        <ContextMenuPortal>
+          <ContextMenuContent className="z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md">
+            {type !== "folder" && (
+              <ContextMenuItem
+                onClick={() => onSelect(path)}
+                className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+              >
+                Open File
+              </ContextMenuItem>
             )}
-            {file.type !== "folder" ? "Open" : file.isOpen ? "Close Folder" : "Open Folder"}
-          </ContextMenuItem>
-          <ContextMenuItem 
-            onClick={(e) => {
-              e.stopPropagation()
-              setIsEditing(true)
-            }}
-            className="hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
-          >
-            <Edit2 className="h-4 w-4 mr-2" />
-            Rename
-          </ContextMenuItem>
-          {file.type === "folder" && (
+            {type === "folder" && (
+              <ContextMenuItem
+                onClick={() => onSelect(path)}
+                className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+              >
+                {isOpen ? "Collapse Folder" : "Expand Folder"}
+              </ContextMenuItem>
+            )}
             <ContextMenuItem
-              onClick={(e) => {
-                e.stopPropagation()
-                onCreate(file.path, "", "file")
-              }}
-              className="hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
+              onClick={handleRenameClick}
+              className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
             >
-              <FileCode className="h-4 w-4 mr-2" />
+              Rename
+            </ContextMenuItem>
+            <ContextMenuItem
+              onClick={handleNewFileClick}
+              className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+            >
               New File
             </ContextMenuItem>
-          )}
-          {file.type === "folder" && (
             <ContextMenuItem
-              onClick={(e) => {
-                e.stopPropagation()
-                onCreate(file.path, "", "folder")
-              }}
-              className="hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
+              onClick={handleNewFolderClick}
+              className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
             >
-              <FolderOpen className="h-4 w-4 mr-2" />
               New Folder
             </ContextMenuItem>
-          )}
-          <ContextMenuSeparator className="bg-gray-700" />
-          <ContextMenuItem 
-            className="text-red-400 focus:text-red-400 hover:bg-gray-700 focus:bg-gray-700 cursor-pointer"
-            onClick={(e) => {
-              e.stopPropagation()
-              onDelete(file.path)
-            }}
-          >
-            <Trash2 className="h-4 w-4 mr-2" />
-            Delete
-          </ContextMenuItem>
-        </ContextMenuContent>
+            <ContextMenuSeparator className="bg-border -mx-1 my-1 h-px" />
+            <ContextMenuItem
+              onClick={handleDeleteClick}
+              className="relative flex cursor-default select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 text-red-500"
+            >
+              Delete
+            </ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenuPortal>
       </ContextMenu>
 
       <AnimatePresence>
-        {file.type === "folder" && file.isOpen && file.children && (
+        {type === "folder" && isOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="overflow-hidden"
           >
-            {file.children.map((child) => (
-              <FileItem
-                key={child.path}
-                file={child}
-                level={level + 1}
-                onSelect={onSelect}
-                onDelete={onDelete}
-                onRename={onRename}
-                onCreate={onCreate}
-                activeFile={activeFile}
-              />
-            ))}
+            <div className="pl-4 border-l border-gray-700 ml-2">
+              {children?.map((childFile) => (
+                <FileItem
+                  key={childFile.id}
+                  file={childFile}
+                  level={level + 1}
+                  onSelect={onSelect}
+                  onDelete={onDelete}
+                  onRename={onRename}
+                  onCreate={onCreate}
+                  activeFile={activeFile}
+                />
+              ))}
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </div>
   )
 }
 

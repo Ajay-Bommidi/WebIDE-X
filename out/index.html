@@ -1,302 +1,884 @@
-<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/8b0eba170afc60e3.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-4c9ba3bc3a0524e4.js"/><script src="/_next/static/chunks/4bd1b696-0450bd1737a4d26a.js" async=""></script><script src="/_next/static/chunks/1684-5215f93c33578264.js" async=""></script><script src="/_next/static/chunks/main-app-7252467db50529ef.js" async=""></script><script src="/_next/static/chunks/8234-f89f938068b38adb.js" async=""></script><script src="/_next/static/chunks/app/page-5b7f7631ee8c02ea.js" async=""></script><title>Online Code Editor</title><meta name="description" content="Created By Ajay"/><meta name="generator" content="Ajay"/><link rel="icon" href="/icon.svg?c061c2c76711408c" type="image/svg+xml" sizes="any"/><script>document.querySelectorAll('body link[rel="icon"], body link[rel="apple-touch-icon"]').forEach(el => document.head.appendChild(el))</script><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><div class="h-screen flex flex-col bg-gray-900 text-white"><div class="flex items-center justify-between p-3 border-b bg-gray-800 border-gray-700" style="opacity:0;transform:translateY(-20px)"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml h-5 w-5 text-blue-500"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg><h1 class="text-lg font-semibold text-white">WebIDE X</h1></div><div class="flex items-center gap-2"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Search (Ctrl+F)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-4 w-4"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Download Project (Zip)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-4 w-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="More Actions" type="button" id="radix-«Rt2fb»" aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings h-4 w-4"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div></div><div class="flex-1 flex overflow-hidden"><div class="flex data-[panel-group-direction=vertical]:flex-col h-full w-full min-h-[inherit] min-w-0" style="display:flex;flex-direction:row;height:100%;overflow:hidden;width:100%" data-panel-group="" data-panel-group-direction="horizontal" data-panel-group-id="«R4fb»"><div class="border-r border-gray-700" id="«R1kfb»" style="flex-basis:0;flex-grow:20.0;flex-shrink:1;overflow:hidden" data-panel-group-id="«R4fb»" data-panel="" data-panel-collapsible="true" data-panel-id="«R1kfb»" data-panel-size="20.0"><div class="h-full flex flex-col bg-sidebar-background text-sidebar-foreground"><div class="flex items-center justify-between p-2 border-b border-border"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml h-5 w-5 text-primary"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg><span class="font-semibold">Explorer</span></div><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-7 w-7 text-muted-foreground hover:text-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-4 w-4"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div><div class="flex-1 flex"><div class="shrink-0 border-r border-border flex flex-col items-center py-2 gap-1 w-12"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 w-9 bg-accent text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-tree h-4 w-4"><path d="M20 10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2.5a1 1 0 0 1-.8-.4l-.9-1.2A1 1 0 0 0 15 3h-2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1Z"></path><path d="M20 21a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-2.9a1 1 0 0 1-.88-.55l-.42-.85a1 1 0 0 0-.92-.6H13a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1Z"></path><path d="M3 5a2 2 0 0 0 2 2h3"></path><path d="M3 3v13a2 2 0 0 0 2 2h3"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 hover:bg-accent/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-4 w-4"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 hover:bg-accent/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal h-4 w-4"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" x2="20" y1="19" y2="19"></line></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 hover:bg-accent/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-keyboard h-4 w-4"><path d="M10 8h.01"></path><path d="M12 12h.01"></path><path d="M14 8h.01"></path><path d="M16 12h.01"></path><path d="M18 8h.01"></path><path d="M6 8h.01"></path><path d="M7 16h10"></path><path d="M8 12h.01"></path><rect width="20" height="16" x="2" y="4" rx="2"></rect></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 hover:bg-accent/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings2 h-4 w-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg></button></div><div class="flex-1"><div class="h-full flex flex-col"><div class="p-2 border-b border-border"><input type="text" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-8" id="fileSearchInput" placeholder="Search files..." name="fileSearchInput" value=""/></div><div class="flex-1 overflow-y-auto"><div class="h-full flex flex-col"><div class="flex items-center justify-between p-2 border-b border-gray-700 bg-gray-800"><span class="text-sm font-medium text-gray-300">EXPLORER</span><div class="flex space-x-1"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary h-10 p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white" title="New File"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary h-10 p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white" title="New Folder"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-4 h-4"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg></button></div></div><div class="flex-1 overflow-y-auto custom-scrollbar py-2"><div style="opacity:1;transform:none"><div class="group flex items-center px-2 py-1 cursor-pointer transition-colors duration-150 ease-in-out hover:bg-gray-700 text-gray-300 hover:text-white" style="-webkit-touch-callout:none;padding-left:8px" data-state="closed"><button class="p-1 -ml-1 mr-1 rounded-sm hover:bg-gray-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down h-4 w-4 text-gray-400"><path d="m6 9 6 6 6-6"></path></svg></button><div class="flex items-center flex-1 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-open h-4 w-4 mr-2 flex-shrink-0"><path d="m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2"></path></svg><span class="truncate text-sm font-medium">src</span></div><div class="opacity-0 group-hover:opacity-100 flex items-center space-x-1 ml-auto"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-6 w-6 text-gray-400 hover:text-white hover:bg-gray-600" title="New File"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus h-3 w-3"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-6 w-6 text-gray-400 hover:text-white hover:bg-gray-600" type="button" id="radix-«R1ebdalkfb»" aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical h-3 w-3"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button></div></div><div style="opacity:0;height:0px"><div style="opacity:0;transform:translateY(-10px)"><div class="group flex items-center px-2 py-1 cursor-pointer transition-colors duration-150 ease-in-out hover:bg-gray-700 text-gray-300 hover:text-white" style="-webkit-touch-callout:none;padding-left:20px" data-state="closed"><div class="flex items-center flex-1 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-code h-4 w-4 mr-2 flex-shrink-0"><path d="M10 12.5 8 15l2 2.5"></path><path d="m14 12.5 2 2.5-2 2.5"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path></svg><span class="truncate text-sm font-medium">index.html</span></div><div class="opacity-0 group-hover:opacity-100 flex items-center space-x-1 ml-auto"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-6 w-6 text-gray-400 hover:text-white hover:bg-gray-600" type="button" id="radix-«R2smdtdalkfb»" aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical h-3 w-3"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button></div></div></div><div style="opacity:0;transform:translateY(-10px)"><div class="group flex items-center px-2 py-1 cursor-pointer transition-colors duration-150 ease-in-out hover:bg-gray-700 text-gray-300 hover:text-white" style="-webkit-touch-callout:none;padding-left:20px" data-state="closed"><div class="flex items-center flex-1 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-code h-4 w-4 mr-2 flex-shrink-0"><path d="M10 12.5 8 15l2 2.5"></path><path d="m14 12.5 2 2.5-2 2.5"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path></svg><span class="truncate text-sm font-medium">style.css</span></div><div class="opacity-0 group-hover:opacity-100 flex items-center space-x-1 ml-auto"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-6 w-6 text-gray-400 hover:text-white hover:bg-gray-600" type="button" id="radix-«R2smltdalkfb»" aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical h-3 w-3"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button></div></div></div><div style="opacity:0;transform:translateY(-10px)"><div class="group flex items-center px-2 py-1 cursor-pointer transition-colors duration-150 ease-in-out hover:bg-gray-700 text-gray-300 hover:text-white" style="-webkit-touch-callout:none;padding-left:20px" data-state="closed"><div class="flex items-center flex-1 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-code h-4 w-4 mr-2 flex-shrink-0"><path d="M10 12.5 8 15l2 2.5"></path><path d="m14 12.5 2 2.5-2 2.5"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"></path></svg><span class="truncate text-sm font-medium">script.js</span></div><div class="opacity-0 group-hover:opacity-100 flex items-center space-x-1 ml-auto"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-6 w-6 text-gray-400 hover:text-white hover:bg-gray-600" type="button" id="radix-«R2smttdalkfb»" aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-ellipsis-vertical h-3 w-3"><circle cx="12" cy="12" r="1"></circle><circle cx="12" cy="5" r="1"></circle><circle cx="12" cy="19" r="1"></circle></svg></button></div></div></div></div></div></div></div></div></div></div></div></div></div><div class="min-w-0" id="«R2kfb»" style="flex-basis:0;flex-grow:80.0;flex-shrink:1;overflow:hidden" data-panel-group-id="«R4fb»" data-panel="" data-panel-id="«R2kfb»" data-panel-size="80.0"><div class="flex flex-col h-full"><div class="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700" style="opacity:0;transform:translateY(-20px)"><div class="flex items-center space-x-2"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Toggle Sidebar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left h-4 w-4"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M9 3v18"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Format Code"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml h-4 w-4"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg></button></div><div class="flex items-center space-x-2"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Switch to Light Theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun h-4 w-4"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Save (Ctrl+S)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save h-4 w-4"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path><path d="M7 3v4a1 1 0 0 0 1 1h7"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Run Code"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml h-4 w-4"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg></button></div></div><div class="flex bg-gray-800 border-b border-gray-700 overflow-x-auto custom-scrollbar"><div class="flex items-center gap-2 px-4 py-2 text-sm border-r border-gray-700 transition-colors duration-150 ease-in-out cursor-pointer text-gray-400 hover:text-white hover:bg-gray-700" style="opacity:1;transform:none"><button class="flex items-center gap-2 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text w-4 h-4 flex-shrink-0 text-orange-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate">index.html</span></button><button class="ml-2 p-1 hover:bg-gray-700 rounded opacity-50 hover:opacity-100 flex-shrink-0" aria-label="Close index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-3 h-3"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div><div class="flex items-center gap-2 px-4 py-2 text-sm border-r border-gray-700 transition-colors duration-150 ease-in-out cursor-pointer text-gray-400 hover:text-white hover:bg-gray-700" style="opacity:1;transform:none"><button class="flex items-center gap-2 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette w-4 h-4 flex-shrink-0 text-blue-500"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg><span class="truncate">style.css</span></button><button class="ml-2 p-1 hover:bg-gray-700 rounded opacity-50 hover:opacity-100 flex-shrink-0" aria-label="Close style.css"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-3 h-3"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div><div class="flex items-center gap-2 px-4 py-2 text-sm border-r border-gray-700 transition-colors duration-150 ease-in-out cursor-pointer text-gray-400 hover:text-white hover:bg-gray-700" style="opacity:1;transform:none"><button class="flex items-center gap-2 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code w-4 h-4 flex-shrink-0 text-yellow-500"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg><span class="truncate">script.js</span></button><button class="ml-2 p-1 hover:bg-gray-700 rounded opacity-50 hover:opacity-100 flex-shrink-0" aria-label="Close script.js"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-3 h-3"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div><div class="flex h-full w-full data-[panel-group-direction=vertical]:flex-col flex-1 min-w-0" style="display:flex;flex-direction:row;height:100%;overflow:hidden;width:100%" data-panel-group="" data-panel-group-direction="horizontal" data-panel-group-id="«Rukfb»"><div class="relative flex-1" id="«R3ukfb»" style="flex-basis:0;flex-grow:60.0;flex-shrink:1;overflow:hidden" data-panel-group-id="«Rukfb»" data-panel="" data-panel-id="«R3ukfb»" data-panel-size="60.0"><div class="flex items-center justify-center h-full text-gray-400 text-lg">Select a file to start coding</div></div><div class="relative flex w-px items-center justify-center after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0 [&amp;[data-panel-group-direction=vertical]&gt;div]:rotate-90 bg-gray-800 hover:bg-blue-500 transition-colors duration-200" role="separator" style="touch-action:none;user-select:none" tabindex="0" data-panel-group-direction="horizontal" data-panel-group-id="«Rukfb»" data-resize-handle="" data-panel-resize-handle-enabled="true" data-panel-resize-handle-id="«R5ukfb»" data-resize-handle-state="inactive"><div class="z-10 flex h-4 w-3 items-center justify-center rounded-sm border bg-border"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical h-2.5 w-2.5"><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg></div></div><div class="relative bg-white flex-1" id="«R7ukfb»" style="flex-basis:0;flex-grow:40.0;flex-shrink:1;overflow:hidden" data-panel-group-id="«Rukfb»" data-panel="" data-panel-id="«R7ukfb»" data-panel-size="40.0"><div class="relative flex flex-col h-full bg-white " style="opacity:0"><div class="flex items-center justify-between px-4 py-2 bg-gray-100 border-b border-gray-200"><div class="flex items-center space-x-2"><h2 class="text-sm font-medium text-gray-700">Preview</h2></div><div class="flex items-center space-x-2"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-500 hover:text-gray-700 hover:bg-gray-200" title="Refresh Preview"><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw h-4 w-4"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg></div></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-500 hover:text-gray-700 hover:bg-gray-200" title="Enter Fullscreen"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize2 h-4 w-4"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></button></div></div><div class="flex-1 relative"><iframe class="w-full h-full border-0" sandbox="allow-scripts" title="Preview" srcDoc="
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="/_next/static/css/f3c1418b1e98437d.css" data-precedence="next"/><link rel="preload" as="script" fetchPriority="low" href="/_next/static/chunks/webpack-573d172cad58a3bc.js"/><script src="/_next/static/chunks/4bd1b696-0450bd1737a4d26a.js" async=""></script><script src="/_next/static/chunks/1684-5215f93c33578264.js" async=""></script><script src="/_next/static/chunks/main-app-7252467db50529ef.js" async=""></script><script src="/_next/static/chunks/9137-46963f6e031eea56.js" async=""></script><script src="/_next/static/chunks/app/page-410374a5aa46d7bb.js" async=""></script><title>Online Code Editor</title><meta name="description" content="Created By Ajay"/><meta name="generator" content="Ajay"/><link rel="icon" href="/icon.svg?c061c2c76711408c" type="image/svg+xml" sizes="any"/><script>document.querySelectorAll('body link[rel="icon"], body link[rel="apple-touch-icon"]').forEach(el => document.head.appendChild(el))</script><script src="/_next/static/chunks/polyfills-42372ed130431b0a.js" noModule=""></script></head><body><div class="h-screen flex flex-col bg-gray-900 text-white"><div class="flex items-center justify-between p-3 border-b bg-gray-800 border-gray-700" style="opacity:0;transform:translateY(-20px)"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml h-5 w-5 text-blue-500"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg><h1 class="text-lg font-semibold text-white">WebIDE X</h1></div><div class="flex items-center gap-2"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Search (Ctrl+F)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-4 w-4"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Download Project (Zip)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-download h-4 w-4"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" x2="12" y1="15" y2="3"></line></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="More Actions" type="button" id="radix-«Rt2fb»" aria-haspopup="menu" aria-expanded="false" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings h-4 w-4"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg></button></div></div><div class="flex-1 flex overflow-hidden"><div class="flex data-[panel-group-direction=vertical]:flex-col h-full w-full min-h-[inherit] min-w-0" style="display:flex;flex-direction:row;height:100%;overflow:hidden;width:100%" data-panel-group="" data-panel-group-direction="horizontal" data-panel-group-id="«R4fb»"><div class="border-r border-gray-700" id="«R1kfb»" style="flex-basis:0;flex-grow:20.0;flex-shrink:1;overflow:hidden" data-panel-group-id="«R4fb»" data-panel="" data-panel-collapsible="true" data-panel-id="«R1kfb»" data-panel-size="20.0"><div class="h-full flex flex-col bg-sidebar-background text-sidebar-foreground"><div class="flex items-center justify-between p-2 border-b border-border"><div class="flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml h-5 w-5 text-primary"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg><span class="font-semibold">Explorer</span></div><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent h-7 w-7 text-muted-foreground hover:text-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x h-4 w-4"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div><div class="flex-1 flex"><div class="shrink-0 border-r border-border flex flex-col items-center py-2 gap-1 w-12"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:bg-accent hover:text-accent-foreground h-9 w-9 bg-accent text-accent-foreground"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder-tree h-4 w-4"><path d="M20 10a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1h-2.5a1 1 0 0 1-.8-.4l-.9-1.2A1 1 0 0 0 15 3h-2a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1Z"></path><path d="M20 21a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1h-2.9a1 1 0 0 1-.88-.55l-.42-.85a1 1 0 0 0-.92-.6H13a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1Z"></path><path d="M3 5a2 2 0 0 0 2 2h3"></path><path d="M3 3v13a2 2 0 0 0 2 2h3"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 hover:bg-accent/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search h-4 w-4"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 hover:bg-accent/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-terminal h-4 w-4"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" x2="20" y1="19" y2="19"></line></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 hover:bg-accent/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-keyboard h-4 w-4"><path d="M10 8h.01"></path><path d="M12 12h.01"></path><path d="M14 8h.01"></path><path d="M16 12h.01"></path><path d="M18 8h.01"></path><path d="M6 8h.01"></path><path d="M7 16h10"></path><path d="M8 12h.01"></path><rect width="20" height="16" x="2" y="4" rx="2"></rect></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 hover:text-accent-foreground h-9 w-9 hover:bg-accent/50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-settings2 h-4 w-4"><path d="M20 7h-9"></path><path d="M14 17H5"></path><circle cx="17" cy="17" r="3"></circle><circle cx="7" cy="7" r="3"></circle></svg></button></div><div class="flex-1"><div class="h-full flex flex-col"><div class="p-2 border-b border-border"><input type="text" class="flex w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm h-8" id="fileSearchInput" placeholder="Search files..." name="fileSearchInput" value=""/></div><div class="flex-1 overflow-y-auto"><div class="h-full flex flex-col"><div class="flex items-center justify-between p-2 border-b border-gray-700 bg-gray-800"><span class="text-sm font-medium text-gray-300">EXPLORER</span><div class="flex space-x-1"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary h-10 p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white" title="New File"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus w-4 h-4"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 bg-primary h-10 p-1 hover:bg-gray-700 rounded text-gray-400 hover:text-white" title="New Folder"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder w-4 h-4"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg></button></div></div><div class="flex-1 overflow-y-auto custom-scrollbar py-2"><div class="w-full"><span data-state="closed" class="w-full" style="-webkit-touch-callout:none"><div class="flex items-center py-1 pr-2 rounded-md cursor-pointer hover:bg-gray-700/50 transition-colors " style="padding-left:8px"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-chevron-down flex-shrink-0 text-gray-400 mr-1"><path d="m6 9 6 6 6-6"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-folder flex-shrink-0 text-blue-400 mr-1"><path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"></path></svg><span class="flex-1 text-sm text-gray-300 truncate">src</span></div></span><div class="overflow-hidden" style="height:0px;opacity:0"><div class="pl-4 border-l border-gray-700 ml-2"><div class="w-full"><span data-state="closed" class="w-full" style="-webkit-touch-callout:none"><div class="flex items-center py-1 pr-2 rounded-md cursor-pointer hover:bg-gray-700/50 transition-colors " style="padding-left:24px"><span style="margin-left:17px"></span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text flex-shrink-0 text-gray-400 mr-1"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="flex-1 text-sm text-gray-300 truncate">index.html</span></div></span></div><div class="w-full"><span data-state="closed" class="w-full" style="-webkit-touch-callout:none"><div class="flex items-center py-1 pr-2 rounded-md cursor-pointer hover:bg-gray-700/50 transition-colors " style="padding-left:24px"><span style="margin-left:17px"></span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text flex-shrink-0 text-gray-400 mr-1"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="flex-1 text-sm text-gray-300 truncate">style.css</span></div></span></div><div class="w-full"><span data-state="closed" class="w-full" style="-webkit-touch-callout:none"><div class="flex items-center py-1 pr-2 rounded-md cursor-pointer hover:bg-gray-700/50 transition-colors " style="padding-left:24px"><span style="margin-left:17px"></span><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text flex-shrink-0 text-gray-400 mr-1"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="flex-1 text-sm text-gray-300 truncate">script.js</span></div></span></div></div></div></div></div></div></div></div></div></div></div></div><div class="min-w-0" id="«R2kfb»" style="flex-basis:0;flex-grow:80.0;flex-shrink:1;overflow:hidden" data-panel-group-id="«R4fb»" data-panel="" data-panel-id="«R2kfb»" data-panel-size="80.0"><div class="flex flex-col h-full"><div class="flex items-center justify-between px-4 py-2 bg-gray-800 border-b border-gray-700" style="opacity:0;transform:translateY(-20px)"><div class="flex items-center space-x-2"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Toggle Sidebar"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left h-4 w-4"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M9 3v18"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Format Code"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml h-4 w-4"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg></button></div><div class="flex items-center space-x-2"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Switch to Light Theme"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sun h-4 w-4"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Save (Ctrl+S)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-save h-4 w-4"><path d="M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path><path d="M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7"></path><path d="M7 3v4a1 1 0 0 0 1 1h7"></path></svg></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-400 hover:text-white hover:bg-gray-700" title="Run Code"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code-xml h-4 w-4"><path d="m18 16 4-4-4-4"></path><path d="m6 8-4 4 4 4"></path><path d="m14.5 4-5 16"></path></svg></button></div></div><div class="flex bg-gray-800 border-b border-gray-700 overflow-x-auto custom-scrollbar"><div class="flex items-center gap-2 px-4 py-2 text-sm border-r border-gray-700 transition-colors duration-150 ease-in-out cursor-pointer text-gray-400 hover:text-white hover:bg-gray-700" style="opacity:1;transform:none"><button class="flex items-center gap-2 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text w-4 h-4 flex-shrink-0 text-orange-500"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"></path><path d="M14 2v4a2 2 0 0 0 2 2h4"></path><path d="M10 9H8"></path><path d="M16 13H8"></path><path d="M16 17H8"></path></svg><span class="truncate">index.html</span></button><button class="ml-2 p-1 hover:bg-gray-700 rounded opacity-50 hover:opacity-100 flex-shrink-0" aria-label="Close index.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-3 h-3"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div><div class="flex items-center gap-2 px-4 py-2 text-sm border-r border-gray-700 transition-colors duration-150 ease-in-out cursor-pointer text-gray-400 hover:text-white hover:bg-gray-700" style="opacity:1;transform:none"><button class="flex items-center gap-2 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-palette w-4 h-4 flex-shrink-0 text-blue-500"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg><span class="truncate">style.css</span></button><button class="ml-2 p-1 hover:bg-gray-700 rounded opacity-50 hover:opacity-100 flex-shrink-0" aria-label="Close style.css"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-3 h-3"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div><div class="flex items-center gap-2 px-4 py-2 text-sm border-r border-gray-700 transition-colors duration-150 ease-in-out cursor-pointer text-gray-400 hover:text-white hover:bg-gray-700" style="opacity:1;transform:none"><button class="flex items-center gap-2 min-w-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code w-4 h-4 flex-shrink-0 text-yellow-500"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg><span class="truncate">script.js</span></button><button class="ml-2 p-1 hover:bg-gray-700 rounded opacity-50 hover:opacity-100 flex-shrink-0" aria-label="Close script.js"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x w-3 h-3"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg></button></div></div><div class="flex h-full w-full data-[panel-group-direction=vertical]:flex-col flex-1 min-w-0" style="display:flex;flex-direction:row;height:100%;overflow:hidden;width:100%" data-panel-group="" data-panel-group-direction="horizontal" data-panel-group-id="«Rukfb»"><div class="relative flex-1" id="«R3ukfb»" style="flex-basis:0;flex-grow:60.0;flex-shrink:1;overflow:hidden" data-panel-group-id="«Rukfb»" data-panel="" data-panel-id="«R3ukfb»" data-panel-size="60.0"><div class="flex items-center justify-center h-full text-gray-400 text-lg">Select a file to start coding</div></div><div class="relative flex w-px items-center justify-center after:absolute after:inset-y-0 after:left-1/2 after:w-1 after:-translate-x-1/2 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-1 data-[panel-group-direction=vertical]:h-px data-[panel-group-direction=vertical]:w-full data-[panel-group-direction=vertical]:after:left-0 data-[panel-group-direction=vertical]:after:h-1 data-[panel-group-direction=vertical]:after:w-full data-[panel-group-direction=vertical]:after:-translate-y-1/2 data-[panel-group-direction=vertical]:after:translate-x-0 [&amp;[data-panel-group-direction=vertical]&gt;div]:rotate-90 bg-gray-800 hover:bg-blue-500 transition-colors duration-200" role="separator" style="touch-action:none;user-select:none" tabindex="0" data-panel-group-direction="horizontal" data-panel-group-id="«Rukfb»" data-resize-handle="" data-panel-resize-handle-enabled="true" data-panel-resize-handle-id="«R5ukfb»" data-resize-handle-state="inactive"><div class="z-10 flex h-4 w-3 items-center justify-center rounded-sm border bg-border"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-grip-vertical h-2.5 w-2.5"><circle cx="9" cy="12" r="1"></circle><circle cx="9" cy="5" r="1"></circle><circle cx="9" cy="19" r="1"></circle><circle cx="15" cy="12" r="1"></circle><circle cx="15" cy="5" r="1"></circle><circle cx="15" cy="19" r="1"></circle></svg></div></div><div class="relative bg-white flex-1" id="«R7ukfb»" style="flex-basis:0;flex-grow:40.0;flex-shrink:1;overflow:hidden" data-panel-group-id="«Rukfb»" data-panel="" data-panel-id="«R7ukfb»" data-panel-size="40.0"><div class="relative flex flex-col h-full bg-white " style="opacity:0"><div class="flex items-center justify-between px-4 py-2 bg-gray-100 border-b border-gray-200"><div class="flex items-center space-x-2"><h2 class="text-sm font-medium text-gray-700">Preview</h2></div><div class="flex items-center space-x-2"><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-500 hover:text-gray-700 hover:bg-gray-200" title="Refresh Preview"><div><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-refresh-cw h-4 w-4"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"></path><path d="M21 3v5h-5"></path><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"></path><path d="M8 16H3v5"></path></svg></div></button><button class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 h-8 w-8 text-gray-500 hover:text-gray-700 hover:bg-gray-200" title="Enter Fullscreen"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize2 h-4 w-4"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" x2="14" y1="3" y2="10"></line><line x1="3" x2="10" y1="21" y2="14"></line></svg></button></div></div><div class="flex-1 relative"><iframe class="w-full h-full border-0" sandbox="allow-scripts" title="Preview" srcDoc="
 &lt;!DOCTYPE html&gt;
       &lt;html&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
     &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
           &lt;style&gt;
-            :root {
-      --primary-color: #6200EE;
-      --primary-dark: #3700B3;
-      --secondary-color: #03DAC6;
-      --background-color: #121212;
-      --surface-color: #1F1F1F;
-      --text-color-primary: #FFFFFF;
-      --text-color-secondary: #BBBBBB;
-      --border-color: #333333;
-      --error-color: #CF6679;
-  }
-  
-  * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-  }
-  
-  body {
-      font-family: &#x27;Roboto&#x27;, sans-serif;
-      background-color: var(--background-color);
-      color: var(--text-color-primary);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      overflow-y: auto;
-  }
-  
-  .dashboard {
-      display: grid;
-      gap: 25px;
-      width: 100%;
-      max-width: 900px;
-      grid-template-columns: 1fr;
-      grid-template-rows: auto auto auto;
-  }
-  
-  @media (min-width: 768px) {
-      .dashboard {
-          grid-template-columns: 1.5fr 1fr;
-          grid-template-rows: auto auto;
-      }
-      .item-creator {
-          grid-column: 1 / 2;
-          grid-row: 1 / 2;
-      }
-      .item-list {
-          grid-column: 1 / 2;
-          grid-row: 2 / 3;
-      }
-      .progress-card {
-          grid-column: 2 / 3;
-          grid-row: 1 / 3;
-      }
-  }
-  
-  header {
-      grid-column: 1 / -1;
-      text-align: center;
-      margin-bottom: 20px;
-  }
-  
-  header h1 {
-      font-size: 3em;
-      color: var(--primary-color);
-      margin-bottom: 10px;
-  }
-  
-  header p {
-      font-size: 1.1em;
-      color: var(--text-color-secondary);
-  }
-  
-  .card {
-      background-color: var(--surface-color);
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border-color);
-  }
-  
-  .card h2 {
-      font-size: 1.8em;
-      color: var(--primary-color);
-      margin-bottom: 20px;
-      border-bottom: 2px solid var(--border-color);
-      padding-bottom: 10px;
-  }
-  
-  .input-group {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-  }
-  
-  .input-group input[type=&quot;text&quot;] {
-      flex-grow: 1;
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      background-color: #2a2a2a;
-      color: var(--text-color-primary);
-      font-size: 1em;
-  }
-  
-  .input-group input[type=&quot;text&quot;]:focus {
-      outline: none;
-      border-color: var(--primary-color);
-      box-shadow: 0 0 0 3px rgba(98, 0, 238, 0.3);
-  }
-  
-  button {
-      background-color: var(--primary-color);
-      color: white;
-      border: none;
-      padding: 12px 25px;
-      border-radius: 8px;
-      cursor: pointer;
-      font-size: 1em;
-      font-weight: 700;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  button:hover {
-      background-color: var(--primary-dark);
-      transform: translateY(-2px);
-  }
-  
-  button:active {
-      transform: translateY(0);
-  }
-  
-  .secondary-btn {
-      background-color: #666;
-      margin-top: 20px;
-  }
-  
-  .secondary-btn:hover {
-      background-color: #555;
-  }
-  
-  .message {
-      color: var(--text-color-secondary);
-      font-size: 0.9em;
-      min-height: 1.2em; /* Reserve space */
-  }
-  
-  .error-message {
-      color: var(--error-color);
-      font-weight: 700;
-  }
-  
-  .item-list ul {
-      list-style: none;
-      padding: 0;
-      max-height: 200px;
-      overflow-y: auto;
-      margin-bottom: 20px;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-  }
-  
-  .item-list li {
-      background-color: #2a2a2a;
-      padding: 10px 15px;
-      border-bottom: 1px solid var(--border-color);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 1em;
-      transition: background-color 0.3s ease;
-  }
-  
-  .item-list li:last-child {
-      border-bottom: none;
-  }
-  
-  .item-list li:hover {
-      background-color: #3a3a3a;
-  }
-  
-  .delete-item-btn {
-      background-color: var(--error-color);
-      padding: 5px 10px;
-      border-radius: 5px;
-      font-size: 0.8em;
-      font-weight: 400;
-  }
-  
-  .delete-item-btn:hover {
-      background-color: #b05260;
-  }
-  
-  .progress-container {
-      width: 100%;
-      background-color: #333;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 25px 0 15px;
-  }
-  
-  .progress-bar {
-      height: 25px;
-      width: 0%;
-      background-color: var(--secondary-color);
-      border-radius: 10px;
-      text-align: center;
-      line-height: 25px;
-      color: var(--background-color);
-      font-weight: 700;
-      transition: width 0.4s ease-in-out;
-  }
-  
-  .progress-controls {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 20px;
-  }
-  
-  /* Keyframe Animations */
-  @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-  }
-  
-  .fade-in {
-      animation: fadeIn 0.3s ease-out;
-  }
-  
-  @keyframes fadeOut {
-      from { opacity: 1; transform: translateY(0); }
-      to { opacity: 0; transform: translateY(10px); }
-  }
-  
-  .fade-out {
-      animation: fadeOut 0.3s ease-in forwards;
-  }
-  
+            body {
+    font-family: &#x27;Roboto&#x27;, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(180deg, #E5E5E5, #F5F5F5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+.iphone {
+    width: 320px;
+    height: 694px;
+    background: linear-gradient(145deg, #1C2526, #2E3A3B);
+    border-radius: 44px;
+    padding: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 0 2px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+.iphone-notch {
+    width: 120px;
+    height: 30px;
+    background: #000;
+    border-radius: 0 0 15px 15px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dynamic-island {
+    width: 90px;
+    height: 20px;
+    background: #1A1A1A;
+    border-radius: 10px;
+}
+.iphone-screen {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 36px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.iphone-screen::-webkit-scrollbar {
+    display: none;
+}
+.swiggy-app {
+    padding: 10px;
+    background: #FFFFFF;
+    min-height: 100%;
+}
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #E6E6E6;
+    position: sticky;
+    top: 0;
+    background: #FFFFFF;
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+.header .location {
+    flex-grow: 1;
+}
+.header .location h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2C2F3A;
+    margin: 0;
+}
+.header .location span {
+    font-size: 12px;
+    color: #686B78;
+}
+.header .profile {
+    width: 32px;
+    height: 32px;
+    background: #E6E6E6;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+.header .profile:hover {
+    transform: scale(1.1);
+}
+.search-bar {
+    margin: 10px 15px;
+    padding: 10px;
+    background: #F5F5F5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.search-bar input {
+    border: none;
+    background: none;
+    width: 100%;
+    font-size: 14px;
+    color: #2C2F3A;
+    outline: none;
+}
+.search-bar input::placeholder {
+    color: #A0A0A0;
+}
+.banner {
+    margin: 10px 15px;
+    height: 120px;
+    background: linear-gradient(90deg, #FC8019, #FF9F00);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.categories {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 15px;
+    gap: 10px;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.categories::-webkit-scrollbar {
+    display: none;
+}
+.category-chip {
+    padding: 8px 16px;
+    background: #F5F5F5;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #2C2F3A;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.category-chip.active {
+    background: #FC8019;
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+.category-chip:hover {
+    background: #FFE8D6;
+}
+.restaurant-list {
+    padding: 10px 15px;
+}
+.restaurant-card {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: slideIn 0.5s ease;
+}
+.restaurant-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+.restaurant-card .image {
+    width: 100px;
+    height: 80px;
+    background: #E6E6E6; /* Replace with: background-image: url(&#x27;restaurant.jpg&#x27;) */
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+.restaurant-card .info {
+    flex-grow: 1;
+}
+.restaurant-card .info h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2C2F3A;
+    margin: 0 0 4px;
+}
+.restaurant-card .info .rating {
+    display: inline-flex;
+    align-items: center;
+    background: #48C479;
+    color: #FFFFFF;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+.restaurant-card .info .rating svg {
+    width: 12px;
+    height: 12px;
+    fill: #FFFFFF;
+    margin-right: 4px;
+}
+.restaurant-card .info .details {
+    font-size: 12px;
+    color: #686B78;
+    margin-bottom: 4px;
+}
+.restaurant-card .info .offer {
+    font-size: 11px;
+    color: #FC8019;
+    font-weight: 500;
+}
+.bottom-nav {
+    position: sticky;
+    bottom: 0;
+    background: #FFFFFF;
+    border-top: 1px solid #E6E6E6;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    z-index: 5;
+}
+.nav-item {
+    text-align: center;
+    font-size: 12px;
+    color: #686B78;
+    cursor: pointer;
+    transition: color 0.3s;
+    position: relative;
+}
+.nav-item.active {
+    color: #FC8019;
+    font-weight: 700;
+}
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    margin-bottom: 4px;
+}
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #FC8019;
+    color: #FFFFFF;
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 12px;
+}
+.cart-modal {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    left: 15px;
+    right: 15px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+.cart-modal.active {
+    display: block;
+}
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.cart-modal h3 {
+    font-size: 14px;
+    margin: 0 0 10px;
+    color: #2C2F3A;
+}
+.cart-item {
+    font-size: 12px;
+    color: #686B78;
+    margin-bottom: 5px;
+}
+.cart-modal .total {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FC8019;
+    margin-top: 10px;
+}
+@media (max-width: 400px) {
+    .iphone {
+        width: 280px;
+        height: 607px;
+    }
+    .header .location h1 {
+        font-size: 14px;
+    }
+    .header .location span {
+        font-size: 11px;
+    }
+    .search-bar input {
+        font-size: 12px;
+    }
+    .banner {
+        font-size: 14px;
+        height: 100px;
+    }
+    .category-chip {
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+    .restaurant-card .info h3 {
+        font-size: 12px;
+    }
+    .restaurant-card .info .rating,
+    .restaurant-card .info .details,
+    .restaurant-card .info .offer {
+        font-size: 11px;
+    }
+    .restaurant-card .image {
+        width: 80px;
+        height: 60px;
+    }
+}
             /* Add some basic reset styles */
             body { margin: 0; padding: 0; }
             * { box-sizing: border-box; }
           &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
-    &lt;!DOCTYPE html&gt;
-  &lt;html lang=&quot;en&quot;&gt;
-  &lt;head&gt;
-      &lt;meta charset=&quot;UTF-8&quot;&gt;
-      &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-      &lt;title&gt;Advanced Interactive Demo&lt;/title&gt;
-  &lt;/head&gt;
-  &lt;body&gt;
-      &lt;div class=&quot;dashboard&quot;&gt;
-          &lt;header&gt;
-              &lt;h1&gt;Dynamic Dashboard&lt;/h1&gt;
-              &lt;p&gt;Built with HTML, CSS, &amp; JS in Web IDE X&lt;/p&gt;
-          &lt;/header&gt;
-  
-          &lt;section class=&quot;card item-creator&quot;&gt;
-              &lt;h2&gt;Add New Item&lt;/h2&gt;
-              &lt;div class=&quot;input-group&quot;&gt;
-                  &lt;input type=&quot;text&quot; id=&quot;itemInput&quot; placeholder=&quot;Enter item name...&quot;&gt;
-                  &lt;button id=&quot;addItemBtn&quot;&gt;Add Item&lt;/button&gt;
-              &lt;/div&gt;
-              &lt;div id=&quot;itemMessage&quot; class=&quot;message&quot;&gt;&lt;/div&gt;
-          &lt;/section&gt;
-  
-          &lt;section class=&quot;card item-list&quot;&gt;
-              &lt;h2&gt;My Items (&lt;span id=&quot;itemCount&quot;&gt;0&lt;/span&gt;)&lt;/h2&gt;
-              &lt;ul id=&quot;itemsContainer&quot;&gt;
-                  &lt;!-- Dynamic items will be added here --&gt;
-              &lt;/ul&gt;
-              &lt;button id=&quot;clearItemsBtn&quot; class=&quot;secondary-btn&quot;&gt;Clear All Items&lt;/button&gt;
-          &lt;/section&gt;
-  
-          &lt;section class=&quot;card progress-card&quot;&gt;
-              &lt;h2&gt;Task Progress&lt;/h2&gt;
-              &lt;div class=&quot;progress-container&quot;&gt;
-                  &lt;div class=&quot;progress-bar&quot; id=&quot;progressBar&quot;&gt;&lt;/div&gt;
-              &lt;/div&gt;
-              &lt;p id=&quot;progressText&quot;&gt;0% Complete&lt;/p&gt;
-              &lt;div class=&quot;progress-controls&quot;&gt;
-                  &lt;button id=&quot;increaseProgressBtn&quot;&gt;+10%&lt;/button&gt;
-                  &lt;button id=&quot;decreaseProgressBtn&quot;&gt;-10%&lt;/button&gt;
-              &lt;/div&gt;
-          &lt;/section&gt;
-      &lt;/div&gt;
-  &lt;/body&gt;
-  &lt;/html&gt;
+    
+      &lt;!DOCTYPE html&gt;
+      &lt;html&gt;
+      &lt;head&gt;
+        &lt;meta charset=&quot;UTF-8&quot;&gt;
+        &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+        &lt;title&gt;Preview&lt;/title&gt;
+        &lt;style&gt;body {
+    font-family: &#x27;Roboto&#x27;, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(180deg, #E5E5E5, #F5F5F5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+.iphone {
+    width: 320px;
+    height: 694px;
+    background: linear-gradient(145deg, #1C2526, #2E3A3B);
+    border-radius: 44px;
+    padding: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), inset 0 0 2px rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+.iphone-notch {
+    width: 120px;
+    height: 30px;
+    background: #000;
+    border-radius: 0 0 15px 15px;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.dynamic-island {
+    width: 90px;
+    height: 20px;
+    background: #1A1A1A;
+    border-radius: 10px;
+}
+.iphone-screen {
+    width: 100%;
+    height: 100%;
+    background: #FFFFFF;
+    border-radius: 36px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.iphone-screen::-webkit-scrollbar {
+    display: none;
+}
+.swiggy-app {
+    padding: 10px;
+    background: #FFFFFF;
+    min-height: 100%;
+}
+.header {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-bottom: 1px solid #E6E6E6;
+    position: sticky;
+    top: 0;
+    background: #FFFFFF;
+    z-index: 5;
+    transition: all 0.3s ease;
+}
+.header .location {
+    flex-grow: 1;
+}
+.header .location h1 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2C2F3A;
+    margin: 0;
+}
+.header .location span {
+    font-size: 12px;
+    color: #686B78;
+}
+.header .profile {
+    width: 32px;
+    height: 32px;
+    background: #E6E6E6;
+    border-radius: 50%;
+    transition: transform 0.2s;
+}
+.header .profile:hover {
+    transform: scale(1.1);
+}
+.search-bar {
+    margin: 10px 15px;
+    padding: 10px;
+    background: #F5F5F5;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+.search-bar input {
+    border: none;
+    background: none;
+    width: 100%;
+    font-size: 14px;
+    color: #2C2F3A;
+    outline: none;
+}
+.search-bar input::placeholder {
+    color: #A0A0A0;
+}
+.banner {
+    margin: 10px 15px;
+    height: 120px;
+    background: linear-gradient(90deg, #FC8019, #FF9F00);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    animation: fadeIn 1s ease-in;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.categories {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px 15px;
+    gap: 10px;
+    white-space: nowrap;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.categories::-webkit-scrollbar {
+    display: none;
+}
+.category-chip {
+    padding: 8px 16px;
+    background: #F5F5F5;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #2C2F3A;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.category-chip.active {
+    background: #FC8019;
+    color: #FFFFFF;
+    transform: scale(1.05);
+}
+.category-chip:hover {
+    background: #FFE8D6;
+}
+.restaurant-list {
+    padding: 10px 15px;
+}
+.restaurant-card {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: slideIn 0.5s ease;
+}
+.restaurant-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-20px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+.restaurant-card .image {
+    width: 100px;
+    height: 80px;
+    background: #E6E6E6; /* Replace with: background-image: url(&#x27;restaurant.jpg&#x27;) */
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+.restaurant-card .info {
+    flex-grow: 1;
+}
+.restaurant-card .info h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: #2C2F3A;
+    margin: 0 0 4px;
+}
+.restaurant-card .info .rating {
+    display: inline-flex;
+    align-items: center;
+    background: #48C479;
+    color: #FFFFFF;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+}
+.restaurant-card .info .rating svg {
+    width: 12px;
+    height: 12px;
+    fill: #FFFFFF;
+    margin-right: 4px;
+}
+.restaurant-card .info .details {
+    font-size: 12px;
+    color: #686B78;
+    margin-bottom: 4px;
+}
+.restaurant-card .info .offer {
+    font-size: 11px;
+    color: #FC8019;
+    font-weight: 500;
+}
+.bottom-nav {
+    position: sticky;
+    bottom: 0;
+    background: #FFFFFF;
+    border-top: 1px solid #E6E6E6;
+    display: flex;
+    justify-content: space-around;
+    padding: 12px 0;
+    z-index: 5;
+}
+.nav-item {
+    text-align: center;
+    font-size: 12px;
+    color: #686B78;
+    cursor: pointer;
+    transition: color 0.3s;
+    position: relative;
+}
+.nav-item.active {
+    color: #FC8019;
+    font-weight: 700;
+}
+.nav-item svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    margin-bottom: 4px;
+}
+.cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background: #FC8019;
+    color: #FFFFFF;
+    font-size: 10px;
+    padding: 3px 6px;
+    border-radius: 12px;
+}
+.cart-modal {
+    display: none;
+    position: fixed;
+    bottom: 60px;
+    left: 15px;
+    right: 15px;
+    background: #FFFFFF;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+    max-height: 200px;
+    overflow-y: auto;
+    animation: slideUp 0.3s ease;
+}
+.cart-modal.active {
+    display: block;
+}
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+.cart-modal h3 {
+    font-size: 14px;
+    margin: 0 0 10px;
+    color: #2C2F3A;
+}
+.cart-item {
+    font-size: 12px;
+    color: #686B78;
+    margin-bottom: 5px;
+}
+.cart-modal .total {
+    font-size: 12px;
+    font-weight: 700;
+    color: #FC8019;
+    margin-top: 10px;
+}
+@media (max-width: 400px) {
+    .iphone {
+        width: 280px;
+        height: 607px;
+    }
+    .header .location h1 {
+        font-size: 14px;
+    }
+    .header .location span {
+        font-size: 11px;
+    }
+    .search-bar input {
+        font-size: 12px;
+    }
+    .banner {
+        font-size: 14px;
+        height: 100px;
+    }
+    .category-chip {
+        font-size: 11px;
+        padding: 6px 12px;
+    }
+    .restaurant-card .info h3 {
+        font-size: 12px;
+    }
+    .restaurant-card .info .rating,
+    .restaurant-card .info .details,
+    .restaurant-card .info .offer {
+        font-size: 11px;
+    }
+    .restaurant-card .image {
+        width: 80px;
+        height: 60px;
+    }
+}&lt;/style&gt;
+      &lt;/head&gt;
+      &lt;body&gt;
+        &lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;iPhone 16 with Swiggy App&lt;/title&gt;
+    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;link href=&quot;styles.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;iphone&quot;&gt;
+        &lt;div class=&quot;iphone-notch&quot;&gt;
+            &lt;div class=&quot;dynamic-island&quot;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;iphone-screen&quot;&gt;
+            &lt;div class=&quot;swiggy-app&quot;&gt;
+                &lt;div class=&quot;header&quot;&gt;
+                    &lt;div class=&quot;location&quot;&gt;
+                        &lt;h1&gt;Whitefield, Bangalore&lt;/h1&gt;
+                        &lt;span&gt;123, Prestige Avenue, Karnataka&lt;/span&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;profile&quot;&gt;&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;search-bar&quot;&gt;
+                    &lt;input type=&quot;text&quot; placeholder=&quot;Search restaurants, dishes...&quot; oninput=&quot;filterRestaurants(this)&quot;&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;banner&quot;&gt;
+                    Flat 20% OFF on your first order! Use code SWIGGY20
+                &lt;/div&gt;
+                &lt;div class=&quot;categories&quot;&gt;
+                    &lt;div class=&quot;category-chip active&quot; data-category=&quot;Food&quot;&gt;Food&lt;/div&gt;
+                    &lt;div class=&quot;category-chip&quot; data-category=&quot;Instamart&quot;&gt;Instamart&lt;/div&gt;
+                    &lt;div class=&quot;category-chip&quot; data-category=&quot;Dineout&quot;&gt;Dineout&lt;/div&gt;
+                    &lt;div class=&quot;category-chip&quot; data-category=&quot;Genie&quot;&gt;Genie&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;restaurant-list&quot; id=&quot;restaurant-list&quot;&gt;
+                    &lt;div class=&quot;restaurant-card&quot; data-category=&quot;Food&quot; onclick=&quot;addToCart(&#x27;Meghana Foods&#x27;, &#x27;Biryani&#x27;)&quot;&gt;
+                        &lt;div class=&quot;image&quot;&gt;&lt;/div&gt;
+                        &lt;div class=&quot;info&quot;&gt;
+                            &lt;h3&gt;Meghana Foods&lt;/h3&gt;
+                            &lt;div class=&quot;rating&quot;&gt;
+                                &lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z&quot;/&gt;&lt;/svg&gt;
+                                4.3
+                            &lt;/div&gt;
+                            &lt;div class=&quot;details&quot;&gt;Biryani, North Indian • 30 mins • ₹₹&lt;/div&gt;
+                            &lt;div class=&quot;offer&quot;&gt;20% OFF up to ₹100&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;restaurant-card&quot; data-category=&quot;Food&quot; onclick=&quot;addToCart(&#x27;Pizza Hut&#x27;, &#x27;Margherita Pizza&#x27;)&quot;&gt;
+                        &lt;div class=&quot;image&quot;&gt;&lt;/div&gt;
+                        &lt;div class=&quot;info&quot;&gt;
+                            &lt;h3&gt;Pizza Hut&lt;/h3&gt;
+                            &lt;div class=&quot;rating&quot;&gt;
+                                &lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z&quot;/&gt;&lt;/svg&gt;
+                                4.1
+                            &lt;/div&gt;
+                            &lt;div class=&quot;details&quot;&gt;Pizza, Fast Food • 35 mins • ₹₹₹&lt;/div&gt;
+                            &lt;div class=&quot;offer&quot;&gt;Free delivery on orders above ₹200&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;restaurant-card&quot; data-category=&quot;Food&quot; onclick=&quot;addToCart(&#x27;La Pino\&#x27;z Pizza&#x27;, &#x27;Farmhouse Pizza&#x27;)&quot;&gt;
+                        &lt;div class=&quot;image&quot;&gt;&lt;/div&gt;
+                        &lt;div class=&quot;info&quot;&gt;
+                            &lt;h3&gt;La Pino&#x27;z Pizza&lt;/h3&gt;
+                            &lt;div class=&quot;rating&quot;&gt;
+                                &lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z&quot;/&gt;&lt;/svg&gt;
+                                4.2
+                            &lt;/div&gt;
+                            &lt;div class=&quot;details&quot;&gt;Pizza, Italian • 28 mins • ₹₹&lt;/div&gt;
+                            &lt;div class=&quot;offer&quot;&gt;Buy 1 Get 1 Free&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;restaurant-card&quot; data-category=&quot;Instamart&quot; onclick=&quot;addToCart(&#x27;Swiggy Instamart&#x27;, &#x27;Grocery Pack&#x27;)&quot;&gt;
+                        &lt;div class=&quot;image&quot;&gt;&lt;/div&gt;
+                        &lt;div class=&quot;info&quot;&gt;
+                            &lt;h3&gt;Swiggy Instamart&lt;/h3&gt;
+                            &lt;div class=&quot;rating&quot;&gt;
+                                &lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z&quot;/&gt;&lt;/svg&gt;
+                                4.5
+                            &lt;/div&gt;
+                            &lt;div class=&quot;details&quot;&gt;Groceries, Essentials • 15 mins • ₹&lt;/div&gt;
+                            &lt;div class=&quot;offer&quot;&gt;10% OFF on first grocery order&lt;/div&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;bottom-nav&quot;&gt;
+                    &lt;div class=&quot;nav-item active&quot; data-nav=&quot;home&quot;&gt;
+                        &lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z&quot;/&gt;&lt;/svg&gt;
+                        Home
+                    &lt;/div&gt;
+                    &lt;div class=&quot;nav-item&quot; data-nav=&quot;search&quot;&gt;
+                        &lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z&quot;/&gt;&lt;/svg&gt;
+                        Search
+                    &lt;/div&gt;
+                    &lt;div class=&quot;nav-item&quot; data-nav=&quot;cart&quot; onclick=&quot;toggleCartModal()&quot;&gt;
+                        &lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0021.25 4H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z&quot;/&gt;&lt;/svg&gt;
+                        &lt;span class=&quot;cart-count&quot; id=&quot;cart-count&quot;&gt;0&lt;/span&gt;
+                        Cart
+                    &lt;/div&gt;
+                    &lt;div class=&quot;nav-item&quot; data-nav=&quot;account&quot;&gt;
+                        &lt;svg viewBox=&quot;0 0 24 24&quot;&gt;&lt;path d=&quot;M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z&quot;/&gt;&lt;/svg&gt;
+                        Account
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class=&quot;cart-modal&quot; id=&quot;cart-modal&quot;&gt;
+                    &lt;h3&gt;Cart&lt;/h3&gt;
+                    &lt;div id=&quot;cart-items&quot;&gt;&lt;/div&gt;
+                    &lt;div class=&quot;total&quot; id=&quot;cart-total&quot;&gt;Total: ₹0&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;script src=&quot;script.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+        &lt;script&gt;let cartCount = 0;
+let cartItems = [];
+let debounceTimeout;
+
+function addToCart(restaurant, item) {
+    cartCount++;
+    cartItems.push({ restaurant, item, price: Math.floor(Math.random() * 200) + 100 });
+    document.getElementById(&#x27;cart-count&#x27;).textContent = cartCount;
+    updateCartModal();
+    alert(`Added ${item} from ${restaurant} to cart!`);
+}
+
+function updateCartModal() {
+    const cartItemsDiv = document.getElementById(&#x27;cart-items&#x27;);
+    const cartTotalDiv = document.getElementById(&#x27;cart-total&#x27;);
+    cartItemsDiv.innerHTML = &#x27;&#x27;;
+    let total = 0;
+    cartItems.forEach(item =&gt; {
+        total += item.price;
+        const div = document.createElement(&#x27;div&#x27;);
+        div.className = &#x27;cart-item&#x27;;
+        div.textContent = `${item.item} (${item.restaurant}) - ₹${item.price}`;
+        cartItemsDiv.appendChild(div);
+    });
+    cartTotalDiv.textContent = `Total: ₹${total}`;
+}
+
+function toggleCartModal() {
+    const modal = document.getElementById(&#x27;cart-modal&#x27;);
+    modal.classList.toggle(&#x27;active&#x27;);
+}
+
+function filterRestaurants(input) {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() =&gt; {
+        const query = input.value.toLowerCase();
+        const cards = document.querySelectorAll(&#x27;.restaurant-card&#x27;);
+        cards.forEach(card =&gt; {
+            const name = card.querySelector(&#x27;h3&#x27;).textContent.toLowerCase();
+            const details = card.querySelector(&#x27;.details&#x27;).textContent.toLowerCase();
+            const category = card.dataset.category.toLowerCase();
+            const activeCategory = document.querySelector(&#x27;.category-chip.active&#x27;).dataset.category.toLowerCase();
+            if ((name.includes(query) || details.includes(query)) &amp;&amp; category === activeCategory) {
+                card.style.display = &#x27;flex&#x27;;
+            } else {
+                card.style.display = &#x27;none&#x27;;
+            }
+        });
+    }, 300);
+}
+
+document.querySelectorAll(&#x27;.category-chip&#x27;).forEach(chip =&gt; {
+    chip.addEventListener(&#x27;click&#x27;, () =&gt; {
+        document.querySelectorAll(&#x27;.category-chip&#x27;).forEach(c =&gt; c.classList.remove(&#x27;active&#x27;));
+        chip.classList.add(&#x27;active&#x27;);
+        const query = document.querySelector(&#x27;.search-bar input&#x27;).value;
+        filterRestaurants({ value: query });
+    });
+});
+
+document.querySelectorAll(&#x27;.nav-item&#x27;).forEach(item =&gt; {
+    item.addEventListener(&#x27;click&#x27;, () =&gt; {
+        if (item.dataset.nav !== &#x27;cart&#x27;) {
+            document.querySelectorAll(&#x27;.nav-item&#x27;).forEach(i =&gt; i.classList.remove(&#x27;active&#x27;));
+            item.classList.add(&#x27;active&#x27;);
+            document.getElementById(&#x27;cart-modal&#x27;).classList.remove(&#x27;active&#x27;);
+        }
+    });
+});&lt;/script&gt;
+      &lt;/body&gt;
+      &lt;/html&gt;
+    
     &lt;script&gt;
         // Error handling
             window.onerror = function(message, source, lineno, colno, error) {
@@ -309,288 +891,75 @@
         
         // Execute user JavaScript
         try {
-            document.addEventListener(&#x27;DOMContentLoaded&#x27;, function() {
-      // State management with localStorage
-      let items = JSON.parse(localStorage.getItem(&#x27;demoItems&#x27;)) || [];
-      let currentProgress = parseInt(localStorage.getItem(&#x27;demoProgress&#x27;)) || 0;
+            let cartCount = 0;
+let cartItems = [];
+let debounceTimeout;
 
-      // DOM Elements
-      const itemInput = document.getElementById(&#x27;itemInput&#x27;);
-      const addItemBtn = document.getElementById(&#x27;addItemBtn&#x27;);
-      const itemMessage = document.getElementById(&#x27;itemMessage&#x27;);
-      const itemsContainer = document.getElementById(&#x27;itemsContainer&#x27;);
-      const itemCountElement = document.getElementById(&#x27;itemCount&#x27;);
-      const clearItemsBtn = document.getElementById(&#x27;clearItemsBtn&#x27;);
-      const progressBar = document.getElementById(&#x27;progressBar&#x27;);
-      const progressText = document.getElementById(&#x27;progressText&#x27;);
-      const increaseProgressBtn = document.getElementById(&#x27;increaseProgressBtn&#x27;);
-      const decreaseProgressBtn = document.getElementById(&#x27;decreaseProgressBtn&#x27;);
+function addToCart(restaurant, item) {
+    cartCount++;
+    cartItems.push({ restaurant, item, price: Math.floor(Math.random() * 200) + 100 });
+    document.getElementById(&#x27;cart-count&#x27;).textContent = cartCount;
+    updateCartModal();
+    alert(`Added ${item} from ${restaurant} to cart!`);
+}
 
-      // Save state
-      function saveState() {
-          localStorage.setItem(&#x27;demoItems&#x27;, JSON.stringify(items));
-          localStorage.setItem(&#x27;demoProgress&#x27;, currentProgress);
-      }
-
-      // Message helper with animation
-      function showMessage(message, isError = false) {
-          itemMessage.textContent = message;
-          itemMessage.className = &#x27;message &#x27; + (isError ? &#x27;error-message&#x27; : &#x27;success-message&#x27;);
-          itemMessage.style.animation = &#x27;none&#x27;;
-          itemMessage.offsetHeight; // Trigger reflow
-          itemMessage.style.animation = &#x27;fadeInOut 3s forwards&#x27;;
-      }
-
-      // Add item with animation
-      function addItem() {
-          const itemName = itemInput.value.trim();
-          if (itemName) {
-              items.push({
-                  text: itemName,
-                  completed: false,
-                  id: Date.now()
-              });
-              saveState();
-              renderItems();
-              itemInput.value = &#x27;&#x27;;
-              showMessage(&#x27;Item &quot;&#x27; + itemName + &#x27;&quot; added!&#x27;);
-              itemInput.focus();
-          } else {
-              showMessage(&#x27;Please enter an item name!&#x27;, true);
-          }
-      }
-
-      // Toggle item completion
-      function toggleItemCompletion(id) {
-          const itemIndex = items.findIndex(item =&gt; item.id === id);
-          if (itemIndex !== -1) {
-              items[itemIndex].completed = !items[itemIndex].completed;
-              saveState();
-              renderItems();
-              updateProgressBar();
-          }
-      }
-
-      // Render items
-      function renderItems() {
-          itemsContainer.innerHTML = &#x27;&#x27;;
-          if (items.length === 0) {
-              itemsContainer.innerHTML = &#x27;&lt;li class=&quot;empty-message&quot;&gt;No items yet. Add some above!&lt;/li&gt;&#x27;;
-          } else {
-              items.forEach(item =&gt; {
-                  const listItem = document.createElement(&#x27;li&#x27;);
-                  listItem.className = &#x27;item fade-in&#x27; + (item.completed ? &#x27; completed&#x27; : &#x27;&#x27;);
-                  listItem.innerHTML = 
-                      &#x27;&lt;div class=&quot;item-content&quot;&gt;&#x27; +
-                      &#x27;&lt;input type=&quot;checkbox&quot; class=&quot;item-checkbox&quot; &#x27; + (item.completed ? &#x27;checked&#x27; : &#x27;&#x27;) + &#x27;&gt;&#x27; +
-                      &#x27;&lt;span class=&quot;item-text&quot;&gt;&#x27; + item.text + &#x27;&lt;/span&gt;&#x27; +
-                      &#x27;&lt;/div&gt;&#x27; +
-                      &#x27;&lt;button class=&quot;delete-item-btn&quot; title=&quot;Delete item&quot;&gt;×&lt;/button&gt;&#x27;;
-                  
-                  const checkbox = listItem.querySelector(&#x27;.item-checkbox&#x27;);
-                  checkbox.addEventListener(&#x27;change&#x27;, () =&gt; toggleItemCompletion(item.id));
-                  
-                  const deleteBtn = listItem.querySelector(&#x27;.delete-item-btn&#x27;);
-                  deleteBtn.addEventListener(&#x27;click&#x27;, () =&gt; {
-                      listItem.classList.add(&#x27;fade-out&#x27;);
-                      listItem.addEventListener(&#x27;animationend&#x27;, () =&gt; {
-                          items = items.filter(i =&gt; i.id !== item.id);
-                          saveState();
-                          renderItems();
-                          showMessage(&#x27;Item deleted!&#x27;);
-                      }, { once: true });
-                  });
-                  
-                  itemsContainer.appendChild(listItem);
-              });
-          }
-          itemCountElement.textContent = items.length;
-          updateProgressBar();
-      }
-
-      // Progress bar with dynamic updates
-      function updateProgressBar() {
-          const completedItems = items.filter(item =&gt; item.completed).length;
-          const totalItems = items.length;
-          const progress = totalItems &gt; 0 ? Math.round((completedItems / totalItems) * 100) : currentProgress;
-          currentProgress = progress;
-          
-          progressBar.style.width = progress + &#x27;%&#x27;;
-          progressText.textContent = progress + &#x27;% Complete&#x27;;
-          
-          // Dynamic color based on progress
-          if (progress &lt; 30) {
-              progressBar.style.backgroundColor = &#x27;#CF6679&#x27;;
-          } else if (progress &lt; 70) {
-              progressBar.style.backgroundColor = &#x27;#FFA500&#x27;;
-          } else {
-              progressBar.style.backgroundColor = &#x27;var(--secondary-color)&#x27;;
-          }
-      }
-
-      // Keyboard shortcuts
-      document.addEventListener(&#x27;keydown&#x27;, function(e) {
-          if (e.key === &#x27;Enter&#x27; &amp;&amp; document.activeElement === itemInput) {
-              addItem();
-          }
-      });
-
-      // Event Listeners
-      addItemBtn.addEventListener(&#x27;click&#x27;, addItem);
-      
-      clearItemsBtn.addEventListener(&#x27;click&#x27;, function() {
-          if (items.length &gt; 0) {
-              const allItems = itemsContainer.querySelectorAll(&#x27;.item&#x27;);
-              let completedAnimations = 0;
-              allItems.forEach(item =&gt; {
-                  item.classList.add(&#x27;fade-out&#x27;);
-                  item.addEventListener(&#x27;animationend&#x27;, () =&gt; {
-                      completedAnimations++;
-                      if (completedAnimations === allItems.length) {
-                          items = [];
-                          saveState();
-                          renderItems();
-                          showMessage(&#x27;All items cleared!&#x27;);
-                      }
-                  }, { once: true });
-              });
-          } else {
-              showMessage(&#x27;No items to clear!&#x27;, true);
-          }
-      });
-
-      increaseProgressBtn.addEventListener(&#x27;click&#x27;, function() {
-          if (currentProgress &lt; 100) {
-              currentProgress = Math.min(100, currentProgress + 10);
-              saveState();
-              updateProgressBar();
-              showMessage(&#x27;Progress increased!&#x27;);
-          } else {
-              showMessage(&#x27;Tasks are 100% complete! 🎉&#x27;);
-          }
-      });
-
-      decreaseProgressBtn.addEventListener(&#x27;click&#x27;, function() {
-          if (currentProgress &gt; 0) {
-              currentProgress = Math.max(0, currentProgress - 10);
-              saveState();
-              updateProgressBar();
-              showMessage(&#x27;Progress decreased!&#x27;);
-          } else {
-              showMessage(&#x27;No progress made yet.&#x27;);
-          }
-      });
-
-      // Add some CSS for the new features
-      const style = document.createElement(&#x27;style&#x27;);
-      style.textContent = `
-          .item {
-              display: flex;
-              justify-content: space-between;
-              align-items: center;
-              padding: 12px;
-              margin: 8px 0;
-              background: var(--background-color);
-              border: 1px solid var(--border-color);
-              border-radius: 8px;
-              transition: all 0.3s ease;
-          }
-          
-          .item:hover {
-              transform: translateX(5px);
-              box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-          }
-          
-          .item.completed .item-text {
-              text-decoration: line-through;
-              color: var(--text-color-secondary);
-          }
-          
-          .item-content {
-              display: flex;
-              align-items: center;
-              gap: 12px;
-          }
-          
-          .item-checkbox {
-              width: 18px;
-              height: 18px;
-              cursor: pointer;
-          }
-          
-          .delete-item-btn {
-              background: none;
-              border: none;
-              color: var(--error-color);
-              font-size: 20px;
-              cursor: pointer;
-              padding: 4px 8px;
-              border-radius: 4px;
-              transition: all 0.2s ease;
-          }
-          
-          .delete-item-btn:hover {
-              background: var(--error-color);
-              color: white;
-          }
-          
-          .message {
-              padding: 8px 16px;
-              border-radius: 4px;
-              margin: 8px 0;
-              animation: fadeInOut 3s forwards;
-          }
-          
-          .success-message {
-              background: var(--secondary-color);
-              color: white;
-          }
-          
-          .error-message {
-              background: var(--error-color);
-              color: white;
-          }
-          
-          @keyframes fadeInOut {
-              0% { opacity: 0; transform: translateY(-10px); }
-              10% { opacity: 1; transform: translateY(0); }
-              90% { opacity: 1; transform: translateY(0); }
-              100% { opacity: 0; transform: translateY(-10px); }
-          }
-          
-          .empty-message {
-              text-align: center;
-              color: var(--text-color-secondary);
-              padding: 20px;
-              font-style: italic;
-          }
-          
-          .fade-in {
-              animation: fadeIn 0.3s ease-in;
-          }
-          
-          .fade-out {
-              animation: fadeOut 0.3s ease-out;
-          }
-          
-          @keyframes fadeIn {
-              from { opacity: 0; transform: translateY(-10px); }
-              to { opacity: 1; transform: translateY(0); }
-          }
-          
-          @keyframes fadeOut {
-              from { opacity: 1; transform: translateY(0); }
-              to { opacity: 0; transform: translateY(-10px); }
-          }
-      `;
-      document.head.appendChild(style);
-
-      // Initial render
-      renderItems();
-      updateProgressBar();
-
-      console.log(&#x27;Enhanced interactive demo with item completion, animations, and keyboard shortcuts loaded! 🚀&#x27;);
+function updateCartModal() {
+    const cartItemsDiv = document.getElementById(&#x27;cart-items&#x27;);
+    const cartTotalDiv = document.getElementById(&#x27;cart-total&#x27;);
+    cartItemsDiv.innerHTML = &#x27;&#x27;;
+    let total = 0;
+    cartItems.forEach(item =&gt; {
+        total += item.price;
+        const div = document.createElement(&#x27;div&#x27;);
+        div.className = &#x27;cart-item&#x27;;
+        div.textContent = `${item.item} (${item.restaurant}) - ₹${item.price}`;
+        cartItemsDiv.appendChild(div);
     });
+    cartTotalDiv.textContent = `Total: ₹${total}`;
+}
+
+function toggleCartModal() {
+    const modal = document.getElementById(&#x27;cart-modal&#x27;);
+    modal.classList.toggle(&#x27;active&#x27;);
+}
+
+function filterRestaurants(input) {
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() =&gt; {
+        const query = input.value.toLowerCase();
+        const cards = document.querySelectorAll(&#x27;.restaurant-card&#x27;);
+        cards.forEach(card =&gt; {
+            const name = card.querySelector(&#x27;h3&#x27;).textContent.toLowerCase();
+            const details = card.querySelector(&#x27;.details&#x27;).textContent.toLowerCase();
+            const category = card.dataset.category.toLowerCase();
+            const activeCategory = document.querySelector(&#x27;.category-chip.active&#x27;).dataset.category.toLowerCase();
+            if ((name.includes(query) || details.includes(query)) &amp;&amp; category === activeCategory) {
+                card.style.display = &#x27;flex&#x27;;
+            } else {
+                card.style.display = &#x27;none&#x27;;
+            }
+        });
+    }, 300);
+}
+
+document.querySelectorAll(&#x27;.category-chip&#x27;).forEach(chip =&gt; {
+    chip.addEventListener(&#x27;click&#x27;, () =&gt; {
+        document.querySelectorAll(&#x27;.category-chip&#x27;).forEach(c =&gt; c.classList.remove(&#x27;active&#x27;));
+        chip.classList.add(&#x27;active&#x27;);
+        const query = document.querySelector(&#x27;.search-bar input&#x27;).value;
+        filterRestaurants({ value: query });
+    });
+});
+
+document.querySelectorAll(&#x27;.nav-item&#x27;).forEach(item =&gt; {
+    item.addEventListener(&#x27;click&#x27;, () =&gt; {
+        if (item.dataset.nav !== &#x27;cart&#x27;) {
+            document.querySelectorAll(&#x27;.nav-item&#x27;).forEach(i =&gt; i.classList.remove(&#x27;active&#x27;));
+            item.classList.add(&#x27;active&#x27;);
+            document.getElementById(&#x27;cart-modal&#x27;).classList.remove(&#x27;active&#x27;);
+        }
+    });
+});
         } catch (error) {
             window.parent.postMessage({
                 type: &#x27;error&#x27;,
@@ -600,4 +969,4 @@
     &lt;/script&gt;
 &lt;/body&gt;
       &lt;/html&gt;
-    "></iframe></div></div></div></div></div></div></div></div><div class="h-7 bg-gray-700 text-gray-300 flex items-center justify-between px-3 text-xs border-t border-gray-600" style="opacity:0;transform:translateY(20px)"><div class="flex items-center space-x-4"><div class="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-branch w-3 h-3"><line x1="6" x2="6" y1="3" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg><span>main</span></div><div class="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors" data-state="closed" style="color:#22c55e"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-3 h-3"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg><span>No Issues</span></div></div><div class="text-center flex-1 hidden sm:block"><span class="text-gray-400">Built with ❤️ by </span><span class="font-bold text-blue-400">Ajay Bommidi</span></div><div class="flex items-center space-x-4"><div class="flex items-center space-x-1" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-select w-3 h-3"><path d="M5 3a2 2 0 0 0-2 2"></path><path d="M19 3a2 2 0 0 1 2 2"></path><path d="M21 19a2 2 0 0 1-2 2"></path><path d="M5 21a2 2 0 0 1-2-2"></path><path d="M9 3h1"></path><path d="M9 21h1"></path><path d="M14 3h1"></path><path d="M14 21h1"></path><path d="M3 9v1"></path><path d="M21 9v1"></path><path d="M3 14v1"></path><path d="M21 14v1"></path><line x1="7" x2="15" y1="8" y2="8"></line><line x1="7" x2="17" y1="12" y2="12"></line><line x1="7" x2="13" y1="16" y2="16"></line></svg><span>Ln <!-- -->1<!-- -->, Col <!-- -->1</span></div><div class="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code w-3 h-3"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg><span>PLAINTEXT</span></div><button class="flex items-center space-x-1 hover:bg-gray-600 px-2 py-0.5 rounded transition-colors" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb w-3 h-3 text-yellow-400"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg><span>Dark</span></button><div class="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-3 h-3 text-green-400"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg><span>Live</span></div></div></div><section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false"></section></div><!--$--><!--/$--><!--$--><!--/$--><script src="/_next/static/chunks/webpack-4c9ba3bc3a0524e4.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[87555,[],\"\"]\n3:I[31295,[],\"\"]\n4:I[90894,[],\"ClientPageRoot\"]\n5:I[58927,[\"8234\",\"static/chunks/8234-f89f938068b38adb.js\",\"8974\",\"static/chunks/app/page-5b7f7631ee8c02ea.js\"],\"default\"]\n8:I[59665,[],\"MetadataBoundary\"]\na:I[59665,[],\"OutletBoundary\"]\nd:I[74911,[],\"AsyncMetadataOutlet\"]\nf:I[59665,[],\"ViewportBoundary\"]\n11:I[26614,[],\"\"]\n:HL[\"/_next/static/css/8b0eba170afc60e3.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"pZGXxh6HkSXZcatAstJ1R\",\"p\":\"\",\"c\":[\"\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"__PAGE__\",{}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/8b0eba170afc60e3.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"children\":[\"$\",\"body\",null,{\"children\":[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]}]}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[[\"$\",\"$L4\",null,{\"Component\":\"$5\",\"searchParams\":{},\"params\":{},\"promises\":[\"$@6\",\"$@7\"]}],[\"$\",\"$L8\",null,{\"children\":\"$L9\"}],null,[\"$\",\"$La\",null,{\"children\":[\"$Lb\",\"$Lc\",[\"$\",\"$Ld\",null,{\"promise\":\"$@e\"}]]}]]}],{},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"cK3tp3lT5gaQIyKVgtebs\",{\"children\":[[\"$\",\"$Lf\",null,{\"children\":\"$L10\"}],null]}],null]}],false]],\"m\":\"$undefined\",\"G\":[\"$11\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"12:\"$Sreact.suspense\"\n13:I[74911,[],\"AsyncMetadata\"]\n6:{}\n7:{}\n9:[\"$\",\"$12\",null,{\"fallback\":null,\"children\":[\"$\",\"$L13\",null,{\"promise\":\"$@14\"}]}]\n"])</script><script>self.__next_f.push([1,"c:null\n"])</script><script>self.__next_f.push([1,"10:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\nb:null\n"])</script><script>self.__next_f.push([1,"14:{\"metadata\":[[\"$\",\"title\",\"0\",{\"children\":\"Online Code Editor\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Created By Ajay\"}],[\"$\",\"meta\",\"2\",{\"name\":\"generator\",\"content\":\"Ajay\"}],[\"$\",\"link\",\"3\",{\"rel\":\"icon\",\"href\":\"/icon.svg?c061c2c76711408c\",\"type\":\"image/svg+xml\",\"sizes\":\"any\"}]],\"error\":null,\"digest\":\"$undefined\"}\ne:{\"metadata\":\"$14:metadata\",\"error\":null,\"digest\":\"$undefined\"}\n"])</script></body></html>
+    "></iframe></div></div></div></div></div></div></div></div><div class="h-7 bg-gray-700 text-gray-300 flex items-center justify-between px-3 text-xs border-t border-gray-600" style="opacity:0;transform:translateY(20px)"><div class="flex items-center space-x-4"><div class="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-git-branch w-3 h-3"><line x1="6" x2="6" y1="3" y2="15"></line><circle cx="18" cy="6" r="3"></circle><circle cx="6" cy="18" r="3"></circle><path d="M18 9a9 9 0 0 1-9 9"></path></svg><span>main</span></div><div class="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors" data-state="closed" style="color:#22c55e"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-3 h-3"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg><span>No Issues</span></div></div><div class="text-center flex-1 hidden sm:block"><span class="text-gray-400">Built with ❤️ by </span><span class="font-bold text-blue-400">Ajay Bommidi</span></div><div class="flex items-center space-x-4"><div class="flex items-center space-x-1" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-text-select w-3 h-3"><path d="M5 3a2 2 0 0 0-2 2"></path><path d="M19 3a2 2 0 0 1 2 2"></path><path d="M21 19a2 2 0 0 1-2 2"></path><path d="M5 21a2 2 0 0 1-2-2"></path><path d="M9 3h1"></path><path d="M9 21h1"></path><path d="M14 3h1"></path><path d="M14 21h1"></path><path d="M3 9v1"></path><path d="M21 9v1"></path><path d="M3 14v1"></path><path d="M21 14v1"></path><line x1="7" x2="15" y1="8" y2="8"></line><line x1="7" x2="17" y1="12" y2="12"></line><line x1="7" x2="13" y1="16" y2="16"></line></svg><span>Ln <!-- -->1<!-- -->, Col <!-- -->1</span></div><div class="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-code w-3 h-3"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg><span>PLAINTEXT</span></div><button class="flex items-center space-x-1 hover:bg-gray-600 px-2 py-0.5 rounded transition-colors" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lightbulb w-3 h-3 text-yellow-400"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg><span>Dark</span></button><div class="flex items-center space-x-1 cursor-pointer hover:text-white transition-colors" data-state="closed"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-zap w-3 h-3 text-green-400"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"></path></svg><span>Live</span></div></div></div><section aria-label="Notifications alt+T" tabindex="-1" aria-live="polite" aria-relevant="additions text" aria-atomic="false"></section></div><!--$--><!--/$--><!--$--><!--/$--><script src="/_next/static/chunks/webpack-573d172cad58a3bc.js" async=""></script><script>(self.__next_f=self.__next_f||[]).push([0])</script><script>self.__next_f.push([1,"1:\"$Sreact.fragment\"\n2:I[87555,[],\"\"]\n3:I[31295,[],\"\"]\n4:I[90894,[],\"ClientPageRoot\"]\n5:I[58927,[\"9137\",\"static/chunks/9137-46963f6e031eea56.js\",\"8974\",\"static/chunks/app/page-410374a5aa46d7bb.js\"],\"default\"]\n8:I[59665,[],\"MetadataBoundary\"]\na:I[59665,[],\"OutletBoundary\"]\nd:I[74911,[],\"AsyncMetadataOutlet\"]\nf:I[59665,[],\"ViewportBoundary\"]\n11:I[26614,[],\"\"]\n:HL[\"/_next/static/css/f3c1418b1e98437d.css\",\"style\"]\n"])</script><script>self.__next_f.push([1,"0:{\"P\":null,\"b\":\"PNjS8IxL8-rkfXAiARU7B\",\"p\":\"\",\"c\":[\"\",\"\"],\"i\":false,\"f\":[[[\"\",{\"children\":[\"__PAGE__\",{}]},\"$undefined\",\"$undefined\",true],[\"\",[\"$\",\"$1\",\"c\",{\"children\":[[[\"$\",\"link\",\"0\",{\"rel\":\"stylesheet\",\"href\":\"/_next/static/css/f3c1418b1e98437d.css\",\"precedence\":\"next\",\"crossOrigin\":\"$undefined\",\"nonce\":\"$undefined\"}]],[\"$\",\"html\",null,{\"lang\":\"en\",\"children\":[\"$\",\"body\",null,{\"children\":[\"$\",\"$L2\",null,{\"parallelRouterKey\":\"children\",\"error\":\"$undefined\",\"errorStyles\":\"$undefined\",\"errorScripts\":\"$undefined\",\"template\":[\"$\",\"$L3\",null,{}],\"templateStyles\":\"$undefined\",\"templateScripts\":\"$undefined\",\"notFound\":[[[\"$\",\"title\",null,{\"children\":\"404: This page could not be found.\"}],[\"$\",\"div\",null,{\"style\":{\"fontFamily\":\"system-ui,\\\"Segoe UI\\\",Roboto,Helvetica,Arial,sans-serif,\\\"Apple Color Emoji\\\",\\\"Segoe UI Emoji\\\"\",\"height\":\"100vh\",\"textAlign\":\"center\",\"display\":\"flex\",\"flexDirection\":\"column\",\"alignItems\":\"center\",\"justifyContent\":\"center\"},\"children\":[\"$\",\"div\",null,{\"children\":[[\"$\",\"style\",null,{\"dangerouslySetInnerHTML\":{\"__html\":\"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}\"}}],[\"$\",\"h1\",null,{\"className\":\"next-error-h1\",\"style\":{\"display\":\"inline-block\",\"margin\":\"0 20px 0 0\",\"padding\":\"0 23px 0 0\",\"fontSize\":24,\"fontWeight\":500,\"verticalAlign\":\"top\",\"lineHeight\":\"49px\"},\"children\":404}],[\"$\",\"div\",null,{\"style\":{\"display\":\"inline-block\"},\"children\":[\"$\",\"h2\",null,{\"style\":{\"fontSize\":14,\"fontWeight\":400,\"lineHeight\":\"49px\",\"margin\":0},\"children\":\"This page could not be found.\"}]}]]}]}]],[]],\"forbidden\":\"$undefined\",\"unauthorized\":\"$undefined\"}]}]}]]}],{\"children\":[\"__PAGE__\",[\"$\",\"$1\",\"c\",{\"children\":[[\"$\",\"$L4\",null,{\"Component\":\"$5\",\"searchParams\":{},\"params\":{},\"promises\":[\"$@6\",\"$@7\"]}],[\"$\",\"$L8\",null,{\"children\":\"$L9\"}],null,[\"$\",\"$La\",null,{\"children\":[\"$Lb\",\"$Lc\",[\"$\",\"$Ld\",null,{\"promise\":\"$@e\"}]]}]]}],{},null,false]},null,false],[\"$\",\"$1\",\"h\",{\"children\":[null,[\"$\",\"$1\",\"IJ-WsZSfJ5efsbG3Q1Bbd\",{\"children\":[[\"$\",\"$Lf\",null,{\"children\":\"$L10\"}],null]}],null]}],false]],\"m\":\"$undefined\",\"G\":[\"$11\",\"$undefined\"],\"s\":false,\"S\":true}\n"])</script><script>self.__next_f.push([1,"12:\"$Sreact.suspense\"\n13:I[74911,[],\"AsyncMetadata\"]\n6:{}\n7:{}\n9:[\"$\",\"$12\",null,{\"fallback\":null,\"children\":[\"$\",\"$L13\",null,{\"promise\":\"$@14\"}]}]\n"])</script><script>self.__next_f.push([1,"c:null\n"])</script><script>self.__next_f.push([1,"10:[[\"$\",\"meta\",\"0\",{\"charSet\":\"utf-8\"}],[\"$\",\"meta\",\"1\",{\"name\":\"viewport\",\"content\":\"width=device-width, initial-scale=1\"}]]\nb:null\n"])</script><script>self.__next_f.push([1,"14:{\"metadata\":[[\"$\",\"title\",\"0\",{\"children\":\"Online Code Editor\"}],[\"$\",\"meta\",\"1\",{\"name\":\"description\",\"content\":\"Created By Ajay\"}],[\"$\",\"meta\",\"2\",{\"name\":\"generator\",\"content\":\"Ajay\"}],[\"$\",\"link\",\"3\",{\"rel\":\"icon\",\"href\":\"/icon.svg?c061c2c76711408c\",\"type\":\"image/svg+xml\",\"sizes\":\"any\"}]],\"error\":null,\"digest\":\"$undefined\"}\ne:{\"metadata\":\"$14:metadata\",\"error\":null,\"digest\":\"$undefined\"}\n"])</script></body></html>

@@ -9,28 +9,15 @@ export interface ProjectData {
   lastModified: number
 }
 
+// No-op for now to eliminate localStorage errors
 export const saveProject = (data: ProjectData): void => {
-  try {
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify({
-        ...data,
-        lastModified: Date.now(),
-      }),
-    )
-  } catch (error) {
-    console.error("Failed to save project:", error)
-  }
+  // console.log("Project save called (localStorage disabled):", data)
 }
 
+// Returns null for now to eliminate localStorage errors
 export const loadProject = (): ProjectData | null => {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY)
-    return saved ? JSON.parse(saved) : null
-  } catch (error) {
-    console.error("Failed to load project:", error)
-    return null
-  }
+  // console.log("Project load called (localStorage disabled)")
+  return null
 }
 
 export const exportProject = async (data: ProjectData): Promise<void> => {

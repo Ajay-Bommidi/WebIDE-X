@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback, useRef, useMemo } from "react"
 import { Toaster, toast } from "sonner"
 import dynamic from "next/dynamic"
 import PreviewPane, { PreviewPaneRef } from "../components/PreviewPane"
@@ -104,106 +104,9 @@ export default function WebIDEX() {
     setTriggerEditorFormat(false)
   }, [])
 
-  // Load saved project on mount
-  useEffect(() => {
-    const saved = loadProject()
-    if (saved) {
-      // Update open files with saved content
-      setOpenFiles((prev) =>
-        prev.map((file) => {
-          if (file.type === "html") return { ...file, content: saved.html }
-          if (file.type === "css") return { ...file, content: saved.css }
-          if (file.type === "js") return { ...file, content: saved.js }
-          return file
-        }),
-      )
-
-      // Update file system with saved content
-      setFileSystem((prev) => {
-        const updateContent = (items: FileTreeNode[]): FileTreeNode[] => {
-          return items.map((item) => {
-            if (item.path === "src/index.html") return { ...item, content: saved.html, isDirty: false }
-            if (item.path === "src/style.css") return { ...item, content: saved.css, isDirty: false }
-            if (item.path === "src/script.js") return { ...item, content: saved.js, isDirty: false }
-            if (item.children) return { ...item, children: updateContent(item.children) }
-            return item
-          })
-        }
-        return updateContent(prev)
-      })
-
-      setLastSaved(saved.lastModified)
-
-      // Load panel sizes
-      const storedPanelSizes = localStorage.getItem("panelSizes")
-      if (storedPanelSizes) {
-        try {
-          const parsedSizes = JSON.parse(storedPanelSizes)
-          if (Array.isArray(parsedSizes) && parsedSizes.length === 2) {
-            setPanelSizes(parsedSizes)
-          }
-        } catch (e) {
-          console.error("Failed to parse panel sizes from local storage", e)
-        }
-      }
-
-      // Load preferences
-      const storedPreferences = localStorage.getItem("editorPreferences")
-      if (storedPreferences) {
-        try {
-          const preferences = JSON.parse(storedPreferences)
-          setEditorFontSize(preferences.editorFontSize || 14)
-          setEditorTabSize(preferences.editorTabSize || 2)
-          setEditorWordWrap(preferences.editorWordWrap || "on")
-          setTerminalFontFamily(preferences.terminalFontFamily || "Consolas")
-        } catch (e) {
-          console.error("Failed to parse editor preferences from local storage", e)
-        }
-      }
-
-      toast.success("Project loaded from local storage")
-    }
-  }, [])
-
-  // Save preferences whenever they change
-  useEffect(() => {
-    const preferences = {
-      editorFontSize,
-      editorTabSize,
-      editorWordWrap,
-      terminalFontFamily,
-    }
-    localStorage.setItem("editorPreferences", JSON.stringify(preferences))
-  }, [editorFontSize, editorTabSize, editorWordWrap, terminalFontFamily])
-
-  // Save panel sizes whenever they change
-  useEffect(() => {
-    localStorage.setItem("panelSizes", JSON.stringify(panelSizes))
-  }, [panelSizes])
-
-  // Setup auto-save
-  useEffect(() => {
-    if (autoSaveTimerRef.current) {
-      clearInterval(autoSaveTimerRef.current)
-    }
-
-    autoSaveTimerRef.current = setInterval(() => {
-      const hasUnsavedChanges = openFiles.some((file) => file.isDirty)
-      if (hasUnsavedChanges) {
-        handleSave()
-      }
-    }, 30000)
-
-    return () => {
-      if (autoSaveTimerRef.current) {
-        clearInterval(autoSaveTimerRef.current)
-      }
-    }
-  }, [openFiles])
-
   // Get current file content
   const getCurrentFileContent = (type: FileType): string => {
-    const file = openFiles.find((f) => f.type === type)
+      const file = openFiles.find((f) => f.type === type)
     return file?.content || defaultCode[type]
   }
 
@@ -212,21 +115,21 @@ export default function WebIDEX() {
     if (activeFile) {
       const updatedOpenFiles = openFiles.map((file) =>
         file.path === activeFile.path ? { ...file, content: value, isDirty: true } : file
-      )
+    )
       setOpenFiles(updatedOpenFiles)
 
-      setFileSystem((prev) => {
+    setFileSystem((prev) => {
         const updateContent = (items: FileTreeNode[]): FileTreeNode[] => {
-          return items.map((item) => {
+        return items.map((item) => {
             if (item.path === "src/index.html") return { ...item, content: value }
             if (item.path === "src/style.css") return { ...item, content: value }
             if (item.path === "src/script.js") return { ...item, content: value }
             if (item.children) return { ...item, children: updateContent(item.children) }
-            return item
-          })
-        }
-        return updateContent(prev)
-      })
+          return item
+        })
+      }
+      return updateContent(prev)
+    })
 
       setLastSaved(Date.now())
     }
@@ -244,14 +147,14 @@ export default function WebIDEX() {
       lastModified: Date.now(),
     }
 
-    saveProject(projectData)
+    // saveProject(projectData) // Removed localStorage save for now
     setLastSaved(Date.now())
 
     // Mark all files as not dirty
     setOpenFiles((prev) => prev.map((file) => ({ ...file, isDirty: false })))
 
-    setLogs((prev) => [...prev, `Project saved at ${new Date().toLocaleTimeString()}`])
-    toast.success("Project saved!")
+    setLogs((prev) => [...prev, `Project saved at ${new Date().toLocaleTimeString()} (No persistence)`])
+    toast.success("Project saved! (No persistence)")
   }, [getCurrentFileContent])
 
   const handleExport = useCallback(() => {
@@ -285,14 +188,14 @@ export default function WebIDEX() {
           setActiveFileType(newFileNode.type)
         } else {
           setActiveFileType(undefined)
-        }
+      }
         toast.success(`File created: ${name}`)
       }
     } else {
       // Automatically open the new folder
       setFileSystem((prev) => toggleFolder(prev, newPath))
       toast.success(`Folder created: ${name}`)
-    }
+  }
   }
 
   // Handles deletion of files from the file system and closes them if open
@@ -324,7 +227,7 @@ export default function WebIDEX() {
       )
     );
 
-    // If it was the active file, update the active file path
+      // If it was the active file, update the active file path
     if (activeFile?.path === oldPath) {
       setActiveFile({ ...activeFile, name: newName, path: newPath, type: fileType || activeFile.type });
     }
@@ -347,26 +250,26 @@ export default function WebIDEX() {
       return
     }
 
-    // Check if file is already open
-    const isOpen = openFiles.some((file) => file.path === path)
+        // Check if file is already open
+        const isOpen = openFiles.some((file) => file.path === path)
 
-    if (!isOpen) {
-      // Add to open files
-      setOpenFiles((prev) => [
-        ...prev,
-        {
-          id: selectedFile.id,
+        if (!isOpen) {
+          // Add to open files
+          setOpenFiles((prev) => [
+            ...prev,
+            {
+              id: selectedFile.id,
           name: selectedFile.name,
-          path: selectedFile.path,
+              path: selectedFile.path,
           type: selectedFile.type,
-          content: selectedFile.content || "",
-          isDirty: false,
+              content: selectedFile.content || "",
+              isDirty: false,
           isOpen: selectedFile.isOpen, // Ensure isOpen is carried over for folders even if it's a file type
-        },
-      ])
-    }
+            },
+          ])
+        }
 
-    // Set as active file
+        // Set as active file
     setActiveFile(selectedFile)
     setActiveFileType(selectedFile.type as FileType)
     setCurrentSearchQuery("") // Clear search when selecting a new file
@@ -483,6 +386,99 @@ export default function WebIDEX() {
     toast.info("Preview Refreshed!");
   }, []);
 
+  const [isExplorerOpen, setIsExplorerOpen] = useState(true)
+  const [project, setProject] = useState<ProjectData>(() => {
+    // Initialize with default code, no localStorage load for now
+    return { ...defaultCode, lastModified: Date.now() };
+  })
+  const [editorPreferences, setEditorPreferences] = useState(() => {
+    // Default preferences, no localStorage load for now
+    return {
+      theme: "vs-dark",
+      fontSize: 14,
+      wordWrap: "on",
+      lineNumbers: "on",
+    }
+  })
+
+  const updateProject = useCallback((newProject: Partial<ProjectData>) => {
+    setProject((prev) => {
+      const updatedProject = { ...prev, ...newProject, lastModified: Date.now() }
+      // saveProject(updatedProject) // Removed localStorage save for now
+      return updatedProject
+    })
+  }, [])
+
+  const handleEditorChange = useCallback(
+    (value: string) => {
+      if (!activeFile || !activeFileType) return
+
+      updateProject({
+        ...project,
+        [activeFileType]: value,
+      })
+    },
+    [activeFile, activeFileType, project, updateProject],
+  )
+
+  const handlePanelLayout = useCallback((sizes: number[]) => {
+    setPanelSizes(sizes) // Update state, but no localStorage save
+    // localStorage.setItem("panelSizes", JSON.stringify(sizes)) // Removed localStorage save for now
+  }, [])
+
+  const handleEditorPreferenceChange = useCallback((newPreferences: Partial<typeof editorPreferences>) => {
+    setEditorPreferences((prev) => ({ ...prev, ...newPreferences }))
+  }, [])
+
+  // Setup auto-save (keeping this logic, but removing localStorage interaction)
+  useEffect(() => {
+    if (autoSaveTimerRef.current) {
+      clearInterval(autoSaveTimerRef.current)
+    }
+
+    autoSaveTimerRef.current = setInterval(() => {
+      const hasUnsavedChanges = openFiles.some((file) => file.isDirty)
+      if (hasUnsavedChanges) {
+        // handleSave() // Removed direct save for now to ensure no localStorage interaction
+      }
+    }, 30000)
+
+    return () => {
+      if (autoSaveTimerRef.current) {
+        clearInterval(autoSaveTimerRef.current)
+      }
+    }
+  }, [openFiles])
+
+  const htmlContent = useMemo(() => {
+    const currentHtml = getCurrentFileContent("html")
+    const currentCss = getCurrentFileContent("css")
+    const currentJs = getCurrentFileContent("js")
+
+    // Dynamically include CSS and JS only if they have content
+    const cssLink = currentCss.trim() ? `<style>${currentCss}</style>` : ""
+    const jsScript = currentJs.trim() ? `<script>${currentJs}</script>` : ""
+
+    return `
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Preview</title>
+        ${cssLink}
+      </head>
+      <body>
+        ${currentHtml}
+        ${jsScript}
+      </body>
+      </html>
+    `
+  }, [getCurrentFileContent])
+
+  // Ref for the main editor and preview area (used for auto-sizing logic)
+  const autoSizeContainerRef = useRef<HTMLDivElement>(null)
+
   return (
     <div className="h-screen flex flex-col bg-gray-900 text-white">
       <TopBar onMenuAction={handleMenuAction} onSearch={handleSearch} onExport={handleExport} />
@@ -503,23 +499,23 @@ export default function WebIDEX() {
             onExpand={() => setSidebarVisible(true)}
             className="border-r border-gray-700"
           >
-            <Sidebar
+          <Sidebar
               isVisible={sidebarVisible}
-              files={fileSystem}
-              activeFile={activeFile}
-              onFileSelect={handleFileSelect}
-              onFileCreate={handleFileCreate}
-              onFileDelete={handleFileDelete}
-              onFileRename={handleFileRename}
-              onSearch={handleSearch}
-              editorFontSize={editorFontSize}
-              setEditorFontSize={setEditorFontSize}
-              editorTabSize={editorTabSize}
-              setEditorTabSize={setEditorTabSize}
-              editorWordWrap={editorWordWrap}
-              setEditorWordWrap={setEditorWordWrap}
-              terminalFontFamily={terminalFontFamily}
-              setTerminalFontFamily={setTerminalFontFamily}
+            files={fileSystem}
+            activeFile={activeFile}
+            onFileSelect={handleFileSelect}
+            onFileCreate={handleFileCreate}
+            onFileDelete={handleFileDelete}
+            onFileRename={handleFileRename}
+            onSearch={handleSearch}
+            editorFontSize={editorFontSize}
+            setEditorFontSize={setEditorFontSize}
+            editorTabSize={editorTabSize}
+            setEditorTabSize={setEditorTabSize}
+            editorWordWrap={editorWordWrap}
+            setEditorWordWrap={setEditorWordWrap}
+            terminalFontFamily={terminalFontFamily}
+            setTerminalFontFamily={setTerminalFontFamily}
               isExplorerOpen={sidebarVisible}
               setIsExplorerOpen={setSidebarVisible}
             />
@@ -537,7 +533,7 @@ export default function WebIDEX() {
                 onRun={refreshPreview}
               />
               
-              <FileTabs
+          <FileTabs
                 activeFile={activeFile}
                 openFiles={openFiles}
                 onFileSelect={(fileNode) => {
@@ -550,8 +546,8 @@ export default function WebIDEX() {
                     }
                   }
                 }}
-                onCloseFile={handleCloseFile}
-              />
+            onCloseFile={handleCloseFile}
+          />
 
               {/* Code and Preview Split */}
               <ResizablePanelGroup direction="horizontal" className="flex-1 min-w-0">
@@ -561,20 +557,20 @@ export default function WebIDEX() {
                   className="relative flex-1"
                 >
                   {activeFile && activeFileType ? (
-                    <EditorPane
+              <EditorPane
                       key="monaco-editor-instance"
-                      language={activeFileType}
+                language={activeFileType}
                       value={activeFile?.content || ""}
                       onChange={handleCodeChange}
-                      theme={theme}
-                      onCursorPositionChange={handleCursorPositionChange}
-                      searchQuery={currentSearchQuery}
-                      triggerFormat={triggerEditorFormat}
-                      onFormatDone={handleEditorFormatDone}
-                      fontSize={editorFontSize}
-                      tabSize={editorTabSize}
-                      wordWrap={editorWordWrap}
-                    />
+                theme={theme}
+                onCursorPositionChange={handleCursorPositionChange}
+                searchQuery={currentSearchQuery}
+                triggerFormat={triggerEditorFormat}
+                onFormatDone={handleEditorFormatDone}
+                fontSize={editorFontSize}
+                tabSize={editorTabSize}
+                wordWrap={editorWordWrap}
+              />
                   ) : (
                     <div className="flex items-center justify-center h-full text-gray-400 text-lg">
                       {activeFile && activeFile.type === "folder"
@@ -590,7 +586,7 @@ export default function WebIDEX() {
                 >
                   <div className="flex items-center justify-center h-full">
                     <div className="w-1 h-8 bg-gray-600 rounded-full" />
-                  </div>
+            </div>
                 </ResizableHandle>
 
                 <ResizablePanel 
@@ -598,13 +594,13 @@ export default function WebIDEX() {
                   minSize={0}
                   className="relative bg-white flex-1"
                 >
-                  <PreviewPane
+              <PreviewPane
                     ref={previewPaneRef}
-                    html={getCurrentFileContent("html")}
-                    css={getCurrentFileContent("css")}
-                    js={getCurrentFileContent("js")}
-                    onErrorsChange={handleErrorsChange}
-                  />
+                html={htmlContent}
+                css={getCurrentFileContent("css")}
+                js={getCurrentFileContent("js")}
+                onErrorsChange={handleErrorsChange}
+              />
                 </ResizablePanel>
               </ResizablePanelGroup>
             </div>
