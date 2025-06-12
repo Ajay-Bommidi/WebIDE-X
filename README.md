@@ -95,6 +95,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-Your Name - [@Linkedin](https://www.linkedin.com/in/ajay-bommidi-88b74b279)
+LinkedIn - [@Linkedin](https://www.linkedin.com/in/ajay-bommidi-88b74b279)
 
 Project Link: [github](https://github.com/Ajay-Bommidi/WebIDE-X.git) 
