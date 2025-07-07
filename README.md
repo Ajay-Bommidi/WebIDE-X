@@ -17,7 +17,7 @@ A modern, feature-rich online code editor built with HTML, CSS, and JavaScript. 
 
 ## Access From Here
 
-[View Click Here](https://onlinecodeeditors.netlify.app/)
+[Click Here](https://onlinecodeeditors.netlify.app/)
 
 ## Getting Started
 
