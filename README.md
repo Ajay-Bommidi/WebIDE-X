@@ -15,9 +15,9 @@ A modern, feature-rich online code editor built with HTML, CSS, and JavaScript. 
 - ⌨️ Keyboard shortcuts
 - 🌙 Dark/Light mode support
 
-## Live Demo
+## Access From Here
 
-[View Access From Here](https://onlinecodeeditors.netlify.app/)
+[View Click Here](https://onlinecodeeditors.netlify.app/)
 
 ## Getting Started
 
